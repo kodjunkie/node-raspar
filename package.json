@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/kodjunkie/vibe#readme",
   "dependencies": {
+    "commander": "^2.20.3",
     "node-phantom-simple": "^2.2.4",
     "phantomjs": "^2.1.7"
   }
