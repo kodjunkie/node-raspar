@@ -10,6 +10,7 @@ module.exports = class ZippyShare extends Crawler {
    * @param  {} page=1
    */
   async search(query, page = 1) {
+    query = query.replace(" ", "+");
     const { links } = await this.browse(
       `${this.domain}/zippyshare/search?q=${query}#gsc.tab=0&gsc.q=${query}&gsc.page=${page}`,
       function () {
@@ -26,11 +27,11 @@ module.exports = class ZippyShare extends Crawler {
       }
     );
 
-    if (!links) return;
+    if (!links) return { data: {} };
 
     const data = [];
     const promises = links.map(async (link) => {
-      const music = await this.browse(link, function () {
+      const result = await this.browse(link, function () {
         var name = $("tbody div#lrbox .left").children(":nth-child(4)").text();
         var path = $("tbody div#lrbox .right").find("a#dlbutton").attr("href");
 
@@ -51,9 +52,9 @@ module.exports = class ZippyShare extends Crawler {
         };
       });
 
-      if (music && music.name && music.path) {
-        delete music.path;
-        data.push(music);
+      if (result && result.name && result.path) {
+        delete result.path;
+        data.push(result);
       }
     });
 

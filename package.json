@@ -1,14 +1,14 @@
 {
-  "name": "vibe",
+  "name": "raspar",
   "version": "1.0.0",
-  "description": "Music search and download API",
+  "description": "Web scraping API for lossless mp3s, videos, EDM tracks, and archived files",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kodjunkie/vibe.git"
+    "url": "git+https://github.com/kodjunkie/raspar.git"
   },
   "keywords": [
     "Music",
@@ -19,9 +19,9 @@
   "author": "Lawrence Onah <paplow01@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kodjunkie/vibe/issues"
+    "url": "https://github.com/kodjunkie/raspar/issues"
   },
-  "homepage": "https://github.com/kodjunkie/vibe#readme",
+  "homepage": "https://github.com/kodjunkie/raspar#readme",
   "dependencies": {
     "commander": "^2.20.3",
     "node-phantom-simple": "^2.2.4",
