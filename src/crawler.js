@@ -6,7 +6,7 @@ module.exports = class Crawler {
    * @param  {} url
    * @param  {} transform
    */
-  browse(url, transform, wait = 1500) {
+  browse(url, transform, timeout = 1500) {
     return new Promise((resolve, reject) => {
       return driver.create({ path: phantomJs.path }, function (err, browser) {
         if (err) reject(err);
@@ -25,7 +25,7 @@ module.exports = class Crawler {
                     resolve(response);
                     browser.exit();
                   });
-                }, wait);
+                }, timeout);
               }
             );
           });
