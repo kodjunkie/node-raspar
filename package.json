@@ -1,0 +1,30 @@
+{
+  "name": "vibe",
+  "version": "1.0.0",
+  "description": "Music search and download API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kodjunkie/vibe.git"
+  },
+  "keywords": [
+    "Music",
+    "API",
+    "Downlaod",
+    "Search"
+  ],
+  "author": "Lawrence Onah <paplow01@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kodjunkie/vibe/issues"
+  },
+  "homepage": "https://github.com/kodjunkie/vibe#readme",
+  "dependencies": {
+    "commander": "^2.20.3",
+    "node-phantom-simple": "^2.2.4",
+    "phantomjs": "^2.1.7"
+  }
+}
