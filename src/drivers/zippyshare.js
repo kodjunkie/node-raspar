@@ -74,7 +74,7 @@ module.exports = class ZippyShare extends Crawler {
 			await Promise.all(promises);
 			return { data };
 		} catch (error) {
-			return { data: [] };
+			return Promise.reject(error);
 		}
 	}
 };

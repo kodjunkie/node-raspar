@@ -32,13 +32,6 @@ module.exports = class Crawler {
 					});
 				});
 			});
-		}).catch((error) => this.errorHandler(error));
-	}
-
-	/**
-	 * @param  {} error
-	 */
-	errorHandler(error) {
-		// console.error(error);
+		});
 	}
 };
