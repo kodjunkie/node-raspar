@@ -8,7 +8,7 @@ module.exports = class Raspar {
 			const DriverObject = require(`./drivers/${driver}`);
 			return new DriverObject();
 		} catch (error) {
-			console.log(`Driver not found: ${driver}`);
+			console.error(`Driver not found: ${driver}`);
 		}
 	};
 
@@ -32,7 +32,7 @@ module.exports = class Raspar {
 			.description(`start ${config.name} as a REST API`)
 			.action(({ parent }) => {
 				const PORT = process.env.PORT || parent.port;
-				console.log("Raspar is running on port:", PORT);
+				console.log("Raspar is running on port", PORT);
 				serve(PORT);
 			});
 

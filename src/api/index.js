@@ -1,6 +1,6 @@
 const express = require("express");
 const Rasper = require("../raspar");
-const error = require("./error-handler");
+const { notFoundHandler, errorHandler } = require("./error-handler");
 const controller = require("./controller");
 const config = require("../config");
 
@@ -21,8 +21,8 @@ module.exports = (port) => {
 		const driver = req.query.driver || "zippyshare";
 		const supportedDrivers = config.drivers;
 		if (!supportedDrivers.includes(driver)) {
-			const err = new Error(`Driver not found: ${driver}`);
-			next(err);
+			const error = new Error(`Driver not found: ${driver}`);
+			next(error);
 		}
 
 		req.driver = Rasper.resolve(driver.trim());
@@ -32,8 +32,8 @@ module.exports = (port) => {
 	app.get("/search", controller.search);
 
 	// Global error handlers
-	app.use(error.notFoundRequest);
-	app.use(error.errorHandler);
+	app.use(notFoundHandler);
+	app.use(errorHandler);
 
 	app.listen(port);
 };

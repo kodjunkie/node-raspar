@@ -18,7 +18,7 @@ exports.errorHandler = (error, req, res, next) => {
  * @param  {} req
  * @param  {} res
  */
-exports.notFoundRequest = (req, res) => {
+exports.notFoundHandler = (req, res) => {
 	res.status(404).json({
 		error: {
 			message: "Resource not found!",
