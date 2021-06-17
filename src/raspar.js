@@ -29,7 +29,7 @@ module.exports = class Raspar {
 
 		program
 			.command("api", { isDefault: true })
-			.description(`start ${config.name} as a REST API`)
+			.description(`start ${config.name} API server`)
 			.action(({ parent }) => {
 				const PORT = process.env.PORT || parent.port;
 				console.log("Raspar is running on port", PORT);
@@ -37,7 +37,6 @@ module.exports = class Raspar {
 			});
 
 		program.parse(argv);
-		const arg = argv.slice(2);
-		if (!arg || arg.length < 1) program.help();
+		if (argv.slice(2).length < 1) program.help();
 	};
 };
