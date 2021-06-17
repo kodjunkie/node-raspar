@@ -1,7 +1,7 @@
 {
 	"name": "raspar",
 	"version": "1.0.0",
-	"description": "API for scraping lossless mp3s, videos, EDM tracks, and archived files",
+	"description": "Node API for scraping lossless mp3s, albums, EDM tracks, and more.",
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js"
@@ -27,6 +27,7 @@
 	"homepage": "https://github.com/kodjunkie/raspar#readme",
 	"dependencies": {
 		"commander": "^2.20.3",
+		"express": "^4.17.1",
 		"node-phantom-simple": "^2.2.4",
 		"phantomjs": "^2.1.7"
 	},
@@ -37,7 +38,5 @@
 		"eslint-plugin-prettier": "^3.4.0",
 		"prettier": "^2.3.1"
 	},
-	"bin": {
-		"rasper": "./index.js"
-	}
+	"bin": "./index.js"
 }

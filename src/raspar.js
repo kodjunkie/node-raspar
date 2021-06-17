@@ -3,9 +3,13 @@ module.exports = class Raspar {
 	 * @param  string driver="zippyshare"
 	 */
 	static resolve = (driver = "zippyshare") => {
-		driver = driver.trim().toLowerCase();
-		const Driver = require(`./drivers/${driver}`);
-		return new Driver();
+		try {
+			driver = driver.trim().toLowerCase();
+			const DriverObject = require(`./drivers/${driver}`);
+			return new DriverObject();
+		} catch (error) {
+			console.error(`Driver not found: ${driver}`);
+		}
 	};
 
 	/**
@@ -14,6 +18,7 @@ module.exports = class Raspar {
 	static commander = (argv = []) => {
 		const { Command } = require("commander");
 		const config = require("./config");
+		const serve = require("./api");
 		const program = new Command();
 
 		program
@@ -27,7 +32,8 @@ module.exports = class Raspar {
 			.description(`start ${config.name} as a REST API`)
 			.action(({ parent }) => {
 				const PORT = process.env.PORT || parent.port;
-				console.log("Raspar API is running...", PORT);
+				console.log("Raspar is running on port", PORT);
+				serve(PORT);
 			});
 
 		program.parse(argv);
