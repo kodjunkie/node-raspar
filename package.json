@@ -27,6 +27,7 @@
 	"homepage": "https://github.com/kodjunkie/raspar#readme",
 	"dependencies": {
 		"commander": "^2.20.3",
+		"express": "^4.17.1",
 		"node-phantom-simple": "^2.2.4",
 		"phantomjs": "^2.1.7"
 	},
