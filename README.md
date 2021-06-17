@@ -1,3 +1,3 @@
 # Raspar
 
-Web scraping API for lossless mp3s, videos, EDM tracks, and archived files
+Node API for scraping lossless mp3s, videos, EDM tracks, archived files and more.
