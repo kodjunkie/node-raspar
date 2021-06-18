@@ -23,7 +23,7 @@ module.exports = class Crawler {
 	browse(url, transform) {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const browser = await puppeteer.launch();
+				const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 				const page = await browser.newPage();
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
 				await page.addScriptTag({ path: require.resolve("jquery") });
