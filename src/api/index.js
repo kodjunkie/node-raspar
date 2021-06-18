@@ -1,5 +1,5 @@
 const express = require("express");
-const Rasper = require("../raspar");
+const Raspar = require("../raspar");
 const { notFoundHandler, errorHandler } = require("./utils");
 const controller = require("./controller");
 const config = require("../config");
@@ -25,14 +25,14 @@ module.exports = (port) => {
 			next(error);
 		}
 
-		req.raspar = Rasper.resolve(driver.trim());
+		req.raspar = Raspar.resolve(driver);
 		next();
 	});
 
 	app.get("/search", controller.search);
+	app.use(notFoundHandler);
 
 	// Global error handlers
-	app.use(notFoundHandler);
 	app.use(errorHandler);
 
 	app.listen(port);
