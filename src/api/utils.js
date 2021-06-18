@@ -14,7 +14,7 @@ exports.errorHandler = (error, req, res, next) => {
 };
 
 /**
- * Handler not found requests
+ * Not found requests handler
  * @param  {} req
  * @param  {} res
  */

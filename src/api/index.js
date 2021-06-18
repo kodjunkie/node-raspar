@@ -1,6 +1,6 @@
 const express = require("express");
 const Rasper = require("../raspar");
-const { notFoundHandler, errorHandler } = require("./error-handler");
+const { notFoundHandler, errorHandler } = require("./utils");
 const controller = require("./controller");
 const config = require("../config");
 
@@ -25,7 +25,7 @@ module.exports = (port) => {
 			next(error);
 		}
 
-		req.driver = Rasper.resolve(driver.trim());
+		req.raspar = Rasper.resolve(driver.trim());
 		next();
 	});
 
