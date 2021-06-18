@@ -1,5 +1,4 @@
-const nodePhantom = require("node-phantom-simple");
-const phantomJs = require("phantomjs");
+const puppeteer = require("puppeteer");
 
 module.exports = class Crawler {
 	constructor() {
@@ -19,36 +18,21 @@ module.exports = class Crawler {
 	/**
 	 * Web crawler
 	 * @param  {} url
-	 * @param  {} transform
-	 * @param  {} timeout=1500 Here, we are waiting 1.5 seconds.
+	 * @param  function transform
 	 */
-	browse(url, transform, timeout = 1500) {
-		return new Promise((resolve, reject) => {
-			return nodePhantom.create(
-				{ path: phantomJs.path },
-				function (err, browser) {
-					if (err) reject(err);
-					return browser.createPage(function (err, page) {
-						if (err) reject(err);
-						return page.open(url, function (err, status) {
-							if (err) reject(err);
-							page.includeJs(
-								"http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js",
-								function (err) {
-									if (err) reject(err);
-									setTimeout(function () {
-										return page.evaluate(transform, function (err, response) {
-											if (err) reject(err);
-											resolve(response);
-											browser.exit();
-										});
-									}, timeout);
-								}
-							);
-						});
-					});
-				}
-			);
+	browse(url, transform) {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const browser = await puppeteer.launch();
+				const page = await browser.newPage();
+				await page.goto(url, { waitUntil: "load", timeout: 0 });
+				await page.addScriptTag({ path: require.resolve("jquery") });
+				let response = await page.evaluate(transform);
+				browser.close();
+				return resolve(response);
+			} catch (e) {
+				return reject(e);
+			}
 		});
 	}
 };
