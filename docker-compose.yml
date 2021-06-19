@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  raspar:
+    container_name: raspar-api
+    build: ./
+    user: "node"
+    command: npm run dev
+    working_dir: /home/src/raspar
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/home/src/raspar
