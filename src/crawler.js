@@ -1,7 +1,17 @@
+const cacheManager = require("cache-manager");
+const fsStore = require("cache-manager-fs-hash");
 const puppeteer = require("puppeteer");
+const { cache } = require("./config");
 
 module.exports = class Crawler {
-	constructor() {
+	constructor(cacheConfig) {
+		// Configure cache
+		this.cache = cacheManager.caching({
+			store: fsStore,
+			options: cache,
+			...cacheConfig,
+		});
+
 		// Throw error for methods not found
 		return new Proxy(this, {
 			get: function (driver, property) {

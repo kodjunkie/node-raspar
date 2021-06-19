@@ -13,6 +13,10 @@ module.exports = class ZippyShare extends Crawler {
 		try {
 			query = query.replace(" ", "+");
 
+			// Get from cache first
+			const cachedResponse = await this.cache.get(query);
+			if (cachedResponse) return cachedResponse;
+
 			const { links } = await this.browse(
 				`${this.domain}/zippyshare/search?q=${query}#gsc.tab=0&gsc.q=${query}&gsc.page=${page}`,
 				function () {
@@ -72,6 +76,7 @@ module.exports = class ZippyShare extends Crawler {
 			});
 
 			await Promise.all(promises);
+			await this.cache.set(query, { data });
 			return { data };
 		} catch (error) {
 			return Promise.reject(error);

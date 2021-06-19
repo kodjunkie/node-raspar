@@ -4,7 +4,8 @@
 	"description": "Node API for scraping lossless mp3s, albums, EDM tracks, and more.",
 	"main": "index.js",
 	"scripts": {
-		"start": "node . api"
+		"start": "node . api",
+		"dev": "nodemon . api"
 	},
 	"engines": {
 		"node": "14.x"
@@ -26,6 +27,8 @@
 	},
 	"homepage": "https://github.com/kodjunkie/raspar#readme",
 	"dependencies": {
+		"cache-manager": "^3.4.4",
+		"cache-manager-fs-hash": "0.0.9",
 		"commander": "^2.20.3",
 		"express": "^4.17.1",
 		"jquery": "^3.6.0",
@@ -36,6 +39,7 @@
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^3.4.0",
+		"nodemon": "^2.0.7",
 		"prettier": "^2.3.1"
 	},
 	"bin": "./index.js"
