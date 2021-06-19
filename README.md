@@ -12,7 +12,7 @@ Raspar exports a resolver function which accepts a configuration option as argum
 const Raspar = require("raspar")();
 
 // or by passing the driver
-const Raspar = require("raspar")("driver_name");
+const Raspar = require("raspar")(options);
 ```
 
 ### Using ES6
@@ -24,7 +24,7 @@ import raspar from "raspar";
 const Raspar = raspar();
 
 // or by passing the driver
-const Raspar = raspar("driver_name");
+const Raspar = raspar(options);
 ```
 
 ## Available Drivers
