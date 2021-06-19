@@ -11,5 +11,5 @@ exports.search = (req, res, next) => {
 		.then((response) => {
 			res.status(200).json(response);
 		})
-		.catch((error) => next(error));
+		.catch(next);
 };

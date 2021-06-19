@@ -1,12 +1,17 @@
+const { defaultDriver } = require("./config");
+
 module.exports = class Raspar {
 	/**
-	 * @param  string driver="zippyshare"
+	 * @param  {} option={}
 	 */
-	static resolve = (driver = "zippyshare") => {
+	static resolve = (option) => {
 		try {
-			driver = driver.trim().toLowerCase();
+			const driver = option.driver
+				? option.driver.trim().toLowerCase()
+				: defaultDriver;
+			const cacheConfig = option.cache ? option.cache : {};
 			const DriverObject = require(`./drivers/${driver}`);
-			return new DriverObject();
+			return new DriverObject(cacheConfig);
 		} catch (error) {
 			console.error(`Driver not found: ${driver}`);
 		}
@@ -17,19 +22,19 @@ module.exports = class Raspar {
 	 */
 	static commander = (argv = []) => {
 		const { Command } = require("commander");
-		const config = require("./config");
+		const { version, name } = require("./config");
 		const serve = require("./api");
 		const program = new Command();
 
 		program
-			.version(config.version)
-			.name(config.name)
+			.version(version)
+			.name(name)
 			.usage("<command> [options]")
 			.option("-p, --port <port>", "the PORT to run on", 3000);
 
 		program
 			.command("api", { isDefault: true })
-			.description(`start ${config.name} API server`)
+			.description(`start ${name} API server`)
 			.action(({ parent }) => {
 				const PORT = process.env.PORT || parent.port;
 				console.log("Raspar is running on port", PORT);
