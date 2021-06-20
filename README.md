@@ -7,12 +7,25 @@ with caching support for faster response time.
 
 Raspar exports a resolver function which accepts a configuration option as argument and returns a promise for all available methods.
 
+### Configuration (options)
+
+```javascript
+const options = {
+	driver: "", // Driver
+	cache: {} || Boolean, // Cache configuration. To disable caching set to "False"
+};
+```
+
+**NOTE:** You can use any cache store from [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
+
+### Using CommonJs
+
 ```javascript
 // with default driver
 const Raspar = require("raspar")();
 
 // or by passing the driver
-const Raspar = require("raspar")("driver_name");
+const Raspar = require("raspar")(options);
 ```
 
 ### Using ES6
@@ -24,7 +37,7 @@ import raspar from "raspar";
 const Raspar = raspar();
 
 // or by passing the driver
-const Raspar = raspar("driver_name");
+const Raspar = raspar(options);
 ```
 
 ## Available Drivers
@@ -37,7 +50,7 @@ const Raspar = raspar("driver_name");
 
 ## Running / Deploying the API
 
-This is the first step if you're trying to either run it with or without using `Docker`.
+This is the first step if you're trying to either run it with or without using `Docker`
 In terminal run the following commands to get the code on your machine.
 
 ```bash
@@ -76,9 +89,9 @@ $ docker run -it -p 3000:3000/tcp raspar
 Run these additional commands
 
 ```bash
-# To boot-up first time only or whenever docker file is modified (builds the containers)
+# To boot-up first time only or whenever docker file is modified (builds the container)
 $ docker-compose up --build
-# To boot-up without building the containers (regular use)
+# To boot-up without building the container (regular use)
 $ docker-compose up
 # To shut-down
 $ docker-compose down

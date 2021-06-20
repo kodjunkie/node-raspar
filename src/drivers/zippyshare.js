@@ -1,4 +1,4 @@
-const Crawler = require("../crawler");
+const Crawler = require("../lib/crawler");
 
 module.exports = class ZippyShare extends Crawler {
 	get domain() {

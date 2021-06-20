@@ -1,17 +1,17 @@
-const { defaultDriver } = require("./config");
+const { defaultDriver } = require("../config");
 
 module.exports = class Raspar {
 	/**
-	 * @param  {} option={}
+	 * @param  {} options={}
 	 */
-	static resolve = (option) => {
-		try {
-			const driver = option.driver
-				? option.driver.trim().toLowerCase()
+	static resolve = (options) => {
+		const driver =
+			options && typeof options.driver == "string"
+				? options.driver
 				: defaultDriver;
-			const cacheConfig = option.cache ? option.cache : {};
-			const DriverObject = require(`./drivers/${driver}`);
-			return new DriverObject(cacheConfig);
+		try {
+			const DriverObject = require(`../drivers/${driver.trim().toLowerCase()}`);
+			return new DriverObject(options);
 		} catch (error) {
 			console.error(`Driver not found: ${driver}`);
 		}
@@ -22,8 +22,8 @@ module.exports = class Raspar {
 	 */
 	static commander = (argv = []) => {
 		const { Command } = require("commander");
-		const { version, name } = require("./config");
-		const serve = require("./api");
+		const { version, name } = require("../config");
+		const serve = require("../api");
 		const program = new Command();
 
 		program
