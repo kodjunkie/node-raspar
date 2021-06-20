@@ -15,7 +15,6 @@ const options = {
 	cache:
 		{
 			ttl: 60 * 60,
-            ...
 		} || Boolean, // Cache configuration, to disable caching set to "false"
 };
 ```
