@@ -1,9 +1,15 @@
 const puppeteer = require("puppeteer");
 const Cache = require("./cache");
+const { cache: cacheConfig } = require("../config");
 
 module.exports = class Crawler {
 	constructor(options) {
-		this.cache = new Cache(options);
+		let cacheOptions = {};
+		if (options && options.cache)
+			cacheOptions =
+				typeof options.cache == "boolean" ? cacheOptions : options.cache;
+
+		this.cache = new Cache(cacheConfig, cacheOptions);
 
 		// Throw error for methods not found
 		return new Proxy(this, {

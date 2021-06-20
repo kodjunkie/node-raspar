@@ -11,7 +11,7 @@ module.exports = {
 		store: require("cache-manager-fs-hash"),
 		options: {
 			path: "./temp",
-			ttl: 24 * 60 * 60,
+			ttl: 9 * 60,
 			maxsize: 1000 * 3,
 			subdirs: false,
 			zip: true,
