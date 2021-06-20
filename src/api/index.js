@@ -1,5 +1,5 @@
 const express = require("express");
-const Raspar = require("../raspar");
+const Raspar = require("../lib/raspar");
 const { notFoundHandler, errorHandler } = require("./utils");
 const controller = require("./controller");
 const { drivers, defaultDriver } = require("../config");
@@ -12,7 +12,6 @@ module.exports = (port) => {
 	app.use((req, res, next) => {
 		res.setHeader("Access-Control-Allow-Origin", "*");
 		res.setHeader("Access-Control-Allow-Methods", "GET");
-		res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 		next();
 	});
 

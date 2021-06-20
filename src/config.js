@@ -8,10 +8,13 @@ module.exports = {
 	drivers: ["zippyshare"],
 
 	cache: {
-		path: "./temp",
-		ttl: 24 * 60 * 60,
-		maxsize: 1000 * 3,
-		subdirs: false,
-		zip: true,
+		store: require("cache-manager-fs-hash"),
+		options: {
+			path: "./temp",
+			ttl: 24 * 60 * 60,
+			maxsize: 1000 * 3,
+			subdirs: false,
+			zip: true,
+		},
 	},
 };
