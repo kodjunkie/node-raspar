@@ -11,11 +11,8 @@ Raspar exports a resolver function which accepts a configuration option as argum
 
 ```javascript
 const options = {
-	driver: "", // Driver
-	cache:
-		{
-			ttl: 60 * 60,
-		} || Boolean, // Cache configuration, to disable caching set to "false"
+	driver: "", // driver (default: zippyshare)
+	cache: { options: { ttl: 60 * 8 } } || Boolean, // cache configuration, to disable caching set to "false"
 };
 ```
 
