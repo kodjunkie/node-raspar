@@ -4,11 +4,8 @@ const { cache: cacheConfig } = require("../config");
 
 module.exports = class Crawler {
 	constructor(options) {
-		let cacheOptions = {};
-		if (options && options.cache)
-			cacheOptions =
-				typeof options.cache == "boolean" ? cacheOptions : options.cache;
-
+		let cacheOptions;
+		if (options) cacheOptions = options.cache;
 		this.cache = new Cache(cacheConfig, cacheOptions);
 
 		// Throw error for methods not found

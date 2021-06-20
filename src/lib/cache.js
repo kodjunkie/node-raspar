@@ -2,8 +2,9 @@ const cacheManager = require("cache-manager");
 
 module.exports = class Cache {
 	// Configure cache
-	constructor(config, options = {}) {
+	constructor(config, options) {
 		this.shouldCache = typeof options == "boolean" ? options : true;
+		options = typeof options == "boolean" ? {} : options;
 		this.cache = cacheManager.caching({ ...config, ...options });
 	}
 
