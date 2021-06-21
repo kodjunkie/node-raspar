@@ -12,19 +12,20 @@ Raspar exports a resolver function which accepts a configuration option as argum
 ```javascript
 const options = {
 	driver: "", // driver (default: zippyshare)
-	cache: { options: { ttl: 60 * 8 } } || Boolean, // cache configuration, to disable caching set to "false"
+	cache: { options: { ttl: 60 * 8 } } || Boolean,
+	// cache configuration, to disable caching set to "false"
 };
 ```
 
-**NOTE:** You can use any cache store from [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
+**NOTE:** You can use any promise based cache store engine from [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
 ### Using CommonJs
 
 ```javascript
-// with default driver
+// with default options
 const Raspar = require("raspar")();
 
-// or by passing the driver
+// or by passing custom options
 const Raspar = require("raspar")(options);
 ```
 
@@ -33,10 +34,10 @@ const Raspar = require("raspar")(options);
 ```javascript
 import raspar from "raspar";
 
-// with default driver
+// with default options
 const Raspar = raspar();
 
-// or by passing the driver
+// or by passing custom options
 const Raspar = raspar(options);
 ```
 
