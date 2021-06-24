@@ -22,7 +22,7 @@ RUN npm install -g pm2
 RUN npm install
 
 # Setup cache directory
-RUN mkdir -p temp && chmod -R 777 temp/
+RUN mkdir -p temp && chmod -R 775 temp/
 
 EXPOSE 3000
 
