@@ -1,10 +1,11 @@
+process.setMaxListeners(Infinity);
 const { defaultDriver } = require("../config");
 
 module.exports = class Raspar {
 	/**
 	 * @param  {} options={}
 	 */
-	static resolve = (options) => {
+	static resolve(options) {
 		const driver =
 			options && typeof options.driver == "string"
 				? options.driver
@@ -15,12 +16,12 @@ module.exports = class Raspar {
 		} catch (error) {
 			console.error(`Driver not found: ${driver}`);
 		}
-	};
+	}
 
 	/**
 	 * @param  [] argv=[]
 	 */
-	static commander = (argv = []) => {
+	static commander(argv = []) {
 		const { Command } = require("commander");
 		const { version, name } = require("../config");
 		const serve = require("../api");
@@ -43,5 +44,5 @@ module.exports = class Raspar {
 
 		program.parse(argv);
 		if (argv.slice(2).length < 1) program.help();
-	};
+	}
 };

@@ -29,6 +29,8 @@ module.exports = (port) => {
 	});
 
 	app.get("/search", controller.search);
+	app.get("/list", controller.list);
+
 	app.use(notFoundHandler);
 
 	// Global error handlers

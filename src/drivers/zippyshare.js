@@ -1,11 +1,76 @@
 const Crawler = require("../lib/crawler");
 
 module.exports = class ZippyShare extends Crawler {
-	get domain() {
+	// API endpoint
+	get endpoint() {
 		return "https://www.zippysharedjs.com";
 	}
 
 	/**
+	 * Search helper function
+	 * @param  string query
+	 * @param  Number page=1
+	 */
+	async performSearch(query, page = 1) {
+		const data = [];
+
+		const { links } = await this.browse(
+			`${this.endpoint}/zippyshare/search?q=${query}#gsc.tab=0&gsc.q=${query}&gsc.page=${page}`,
+			function () {
+				var links = [];
+
+				// Get response data
+				$("div.gs-webResult").each(function () {
+					var name = $(this).children(":nth-child(1)").find("a").text(),
+						url = $(this).children(":nth-child(1)").find("a").attr("href");
+					if (name && url) links.push(url);
+				});
+
+				return { links: links };
+			}
+		);
+
+		if (!links) return { data };
+
+		const promises = links.map(async (link) => {
+			const result = await this.browse(link, function () {
+				var name = $("tbody div#lrbox .left").children(":nth-child(4)").text();
+
+				var path = $("tbody div#lrbox .right").find("a#dlbutton").attr("href");
+
+				var size1 = $("tbody div#lrbox .left")
+					.children(":nth-child(6)")
+					.find("font:nth-child(2)")
+					.text();
+
+				var size2 = $("tbody div#lrbox .left").children(":nth-child(7)").text();
+
+				var domain = $("head meta[property='og:url']")
+					.attr("content")
+					.split("/v/")[0];
+
+				var size = size1 || size2;
+
+				return {
+					name: name.substring(0, name.length - 2),
+					url: "https:" + domain + path,
+					size: size.replace("3)", ""),
+					path: path,
+				};
+			});
+
+			if (result && result.name && result.path) {
+				delete result.path;
+				data.push(result);
+			}
+		});
+
+		await Promise.all(promises);
+		return { data };
+	}
+
+	/**
+	 * Music search
 	 * @param  string query
 	 * @param  Number page=1
 	 */
@@ -14,70 +79,61 @@ module.exports = class ZippyShare extends Crawler {
 			query = query.replace(" ", "+");
 
 			// Get from cache first
-			const cachedResponse = await this.cache.get(query);
+			const cachedResponse = await this.cache.get(`${query}+${page}`);
 			if (cachedResponse) return cachedResponse;
 
-			const { links } = await this.browse(
-				`${this.domain}/zippyshare/search?q=${query}#gsc.tab=0&gsc.q=${query}&gsc.page=${page}`,
-				function () {
-					var links = [];
+			// Get and cache the response
+			const data = await this.performSearch(query, page);
+			await this.cache.set(`${query}+${page}`, data);
+
+			return data;
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+
+	/**
+	 * Get list
+	 * @param  string genre
+	 * @param  Number page=1
+	 */
+	async list(genre = "", page = 1) {
+		try {
+			if (genre) genre = genre.replace(" ", "+");
+
+			// Get from cache first
+			const cacheKey = genre ? genre + page : this.endpoint;
+			const cachedResponse = await this.cache.get(cacheKey);
+			if (cachedResponse) return cachedResponse;
+
+			let data = [];
+			if (genre) data = await this.performSearch(genre, page);
+			else {
+				const response = await this.browse(this.endpoint, function () {
+					var results = [];
 
 					// Get response data
-					$("div.gs-webResult").each(function () {
-						var name = $(this).children(":nth-child(1)").find("a").text(),
-							url = $(this).children(":nth-child(1)").find("a").attr("href");
-						if (name && url) links.push(url);
-					});
+					$("div.home-cool:nth(0) .m12")
+						.find("a")
+						.each(function () {
+							var name = $(this).children(".chip").text(),
+								url = $(this).attr("href");
 
-					return { links: links };
-				}
-			);
+							if (name && url)
+								results.push({
+									name,
+									url: `https://www.zippysharedjs.com/${url}`,
+								});
+						});
 
-			const data = [];
-			if (!links) return { data };
-
-			const promises = links.map(async (link) => {
-				const result = await this.browse(link, function () {
-					var name = $("tbody div#lrbox .left")
-						.children(":nth-child(4)")
-						.text();
-
-					var path = $("tbody div#lrbox .right")
-						.find("a#dlbutton")
-						.attr("href");
-
-					var size1 = $("tbody div#lrbox .left")
-						.children(":nth-child(6)")
-						.find("font:nth-child(2)")
-						.text();
-
-					var size2 = $("tbody div#lrbox .left")
-						.children(":nth-child(7)")
-						.text();
-
-					var domain = $("head meta[property='og:url']")
-						.attr("content")
-						.split("/v/")[0];
-
-					var size = size1 || size2;
-
-					return {
-						name: name.substring(0, name.length - 2),
-						url: "https:" + domain + path,
-						size: size.replace("3)", ""),
-						path: path,
-					};
+					return { data: results };
 				});
 
-				if (result && result.name && result.path) {
-					delete result.path;
-					data.push(result);
-				}
-			});
+				data = response.data;
+			}
 
-			await Promise.all(promises);
-			await this.cache.set(query, { data });
-			return { data };
+			await this.cache.set(cacheKey, data);
+			return data;
 		} catch (error) {
 			return Promise.reject(error);
 		}

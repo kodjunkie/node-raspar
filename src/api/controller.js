@@ -13,3 +13,19 @@ exports.search = (req, res, next) => {
 		})
 		.catch(next);
 };
+
+/**
+ * Endpoint /list
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
+exports.list = (req, res, next) => {
+	const query = req.query;
+	req.raspar
+		.list(query.genre, query.page)
+		.then((response) => {
+			res.status(200).json(response);
+		})
+		.catch(next);
+};
