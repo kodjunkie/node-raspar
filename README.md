@@ -5,7 +5,7 @@ with caching support for faster response time.
 
 ## Use Programmatically
 
-Raspar exports a resolver function which accepts a configuration option as argument and returns a promise for all available methods.
+Raspar exports a resolver function which accepts a configuration object as argument and returns a promise for all available methods.
 
 ### Configuration (options)
 
@@ -17,7 +17,7 @@ const options = {
 };
 ```
 
-**NOTE:** You can use any promise based cache store engine from [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
+**NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
 ### Using CommonJs
 
@@ -48,6 +48,7 @@ const Raspar = raspar(options);
 ## Available Methods
 
 - `Raspar.search()`
+- `Raspar.list()`
 
 ## Running / Deploying the API
 
@@ -60,7 +61,7 @@ $ git clone https://github.com/kodjunkie/raspar.git
 # change directory
 $ cd raspar
 # chmod the cache directory
-$ sudo chmod -R 777 temp/
+$ sudo chmod -R 775 temp/
 ```
 
 ### Without Docker
@@ -91,11 +92,11 @@ Run these additional commands
 
 ```bash
 # To boot-up first time only or whenever docker file is modified (builds the container)
-$ docker-compose up --build
+$ docker compose up --build
 # To boot-up without building the container (regular use)
-$ docker-compose up
+$ docker compose up
 # To shut-down
-$ docker-compose down
+$ docker compose down
 ```
 
 <!-- ### Heroku (In progress)
