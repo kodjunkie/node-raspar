@@ -4,6 +4,7 @@ const { cache: cacheConfig } = require("../config");
 
 module.exports = class Crawler {
 	constructor(options) {
+		// Configure cache
 		let cacheOptions;
 		if (options) cacheOptions = options.cache;
 		this.cache = new Cache(cacheConfig, cacheOptions);
@@ -28,8 +29,11 @@ module.exports = class Crawler {
 	 */
 	browse(url, transform) {
 		return new Promise(async (resolve, reject) => {
+			const browser = await puppeteer.launch({
+				args: ["--disable-gpu", "--no-sandbox"],
+			});
+
 			try {
-				const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 				const page = await browser.newPage();
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
 				await page.addScriptTag({ path: require.resolve("jquery") });
@@ -37,6 +41,7 @@ module.exports = class Crawler {
 				browser.close();
 				return resolve(response);
 			} catch (e) {
+				browser.close();
 				return reject(e);
 			}
 		});
