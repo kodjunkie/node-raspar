@@ -1,7 +1,9 @@
-module.exports = {
-	name: "raspar",
+const { name, version } = require("../package.json");
 
-	version: "1.0.0",
+module.exports = {
+	name: name,
+
+	version: version,
 
 	defaultDriver: "zippyshare",
 
