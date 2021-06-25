@@ -1,6 +1,6 @@
 # Raspar
 
-Node API for scraping lossless mp3s, albums, EDM tracks, and more
+Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more
 with caching support for faster response time.
 
 ## Use Programmatically
@@ -44,11 +44,14 @@ const Raspar = raspar(options);
 ## Available Drivers
 
 - `zippyshare (default)`
+- `1337x`
 
 ## Available Methods
 
-- `Raspar.search()`
-- `Raspar.list()`
+| Drivers      | Search             | List                     |
+| ------------ | ------------------ | ------------------------ |
+| `zippyshare` | :heavy_check_mark: | :heavy_check_mark:       |
+| `1337x`      | :heavy_check_mark: | :heavy_multiplication_x: |
 
 ## Running / Deploying the API
 
@@ -83,7 +86,7 @@ Run these additional commands
 # build the container
 $ docker build -t raspar .
 # run the container mapping the ports
-$ docker run -it -p 3000:3000/tcp raspar
+$ docker run -it -p 3000:3000 raspar
 ```
 
 ### Development with Docker

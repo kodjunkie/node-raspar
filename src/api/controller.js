@@ -23,7 +23,7 @@ exports.search = (req, res, next) => {
 exports.list = (req, res, next) => {
 	const query = req.query;
 	req.raspar
-		.list(query.genre, query.page)
+		.list(query.page, query.genre)
 		.then((response) => {
 			res.status(200).json(response);
 		})
