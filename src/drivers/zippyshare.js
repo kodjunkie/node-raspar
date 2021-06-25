@@ -21,7 +21,7 @@ module.exports = class ZippyShare extends Crawler {
 
 				// Get response data
 				$("div.gs-webResult").each(function () {
-					var name = $(this).children(":nth-child(1)").find("a").text(),
+					var name = $(this).children(":nth-child(1)").find("a").text().trim(),
 						url = $(this).children(":nth-child(1)").find("a").attr("href");
 					if (name && url) links.push(url);
 				});
@@ -34,7 +34,10 @@ module.exports = class ZippyShare extends Crawler {
 
 		const promises = links.map(async (link) => {
 			const result = await this.browse(link, function () {
-				var name = $("tbody div#lrbox .left").children(":nth-child(4)").text();
+				var name = $("tbody div#lrbox .left")
+					.children(":nth-child(4)")
+					.text()
+					.trim();
 
 				var path = $("tbody div#lrbox .right").find("a#dlbutton").attr("href");
 
@@ -79,12 +82,13 @@ module.exports = class ZippyShare extends Crawler {
 			query = query.replace(" ", "+");
 
 			// Get from cache first
-			const cachedResponse = await this.cache.get(`${query}+${page}`);
+			const cacheKey = query ? query + page + this.endpoint : this.endpoint;
+			const cachedResponse = await this.cache.get(cacheKey);
 			if (cachedResponse) return cachedResponse;
 
 			// Get and cache the response
 			const data = await this.performSearch(query, page);
-			await this.cache.set(`${query}+${page}`, data);
+			await this.cache.set(cacheKey, data);
 
 			return data;
 		} catch (error) {
@@ -97,12 +101,12 @@ module.exports = class ZippyShare extends Crawler {
 	 * @param  string genre
 	 * @param  Number page=1
 	 */
-	async list(genre = "", page = 1) {
+	async list(page = 1, genre = "") {
 		try {
 			if (genre) genre = genre.replace(" ", "+");
 
 			// Get from cache first
-			const cacheKey = genre ? genre + page : this.endpoint;
+			const cacheKey = genre ? genre + page + this.endpoint : this.endpoint;
 			const cachedResponse = await this.cache.get(cacheKey);
 			if (cachedResponse) return cachedResponse;
 
@@ -116,7 +120,7 @@ module.exports = class ZippyShare extends Crawler {
 					$("div.home-cool:nth(0) .m12")
 						.find("a")
 						.each(function () {
-							var name = $(this).children(".chip").text(),
+							var name = $(this).children(".chip").text().trim(),
 								url = $(this).attr("href");
 
 							if (name && url)
