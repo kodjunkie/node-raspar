@@ -11,7 +11,7 @@ Raspar exports a resolver function which accepts a configuration object as argum
 
 ```javascript
 const options = {
-	driver: "", // driver (default: zippyshare)
+	driver: "1337x", // driver (default: zippyshare)
 	cache: { options: { ttl: 60 * 8 } } || Boolean,
 	// cache configuration, to disable caching set to "false"
 };
@@ -89,7 +89,7 @@ $ docker build -t raspar .
 $ docker run -it -p 3000:3000 raspar
 ```
 
-### Development with Docker
+### With Docker Compose
 
 Run these additional commands
 
