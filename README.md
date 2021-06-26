@@ -102,6 +102,12 @@ $ docker compose up
 $ docker compose down
 ```
 
+## Tests
+
+```bash
+$ npm test
+```
+
 <!-- ### Heroku (In progress)
 
 Heroku requires some additional dependencies that aren't included on the Linux box that Heroku spins up for you.
