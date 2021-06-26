@@ -6,7 +6,8 @@
 	"scripts": {
 		"start": "node . api",
 		"dev": "nodemon . api",
-		"test": "jest --verbose"
+		"test": "jest --verbose",
+		"test:watch": "jest --verbose --watchAll"
 	},
 	"engines": {
 		"node": "14.x"

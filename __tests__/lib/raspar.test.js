@@ -1,5 +1,7 @@
 const Raspar = require("../../src/lib/raspar");
 const Crawler = require("../../src/lib/crawler");
+const serve = require("../../src/api");
+jest.mock("../../src/api");
 
 describe("Raspar class tests", () => {
 	it("properly resolves the driver", () => {
@@ -22,12 +24,15 @@ describe("Raspar class tests", () => {
 		expect(console.error).toBeCalledWith("Driver not found: google");
 	});
 
+	it("doesn't run api on invalid command", () => {
+		expect.assertions(1);
+		Raspar.commander(["", "", "test"]);
+		expect(serve).not.toBeCalled();
+	});
+
 	it("runs api on default port", () => {
 		expect.assertions(3);
-		jest.mock("../../src/api");
-
 		Raspar.commander(["", "", "api"]);
-		const serve = require("../../src/api");
 
 		expect(serve).toBeCalled();
 		expect(serve).toBeCalledWith(3000);
@@ -36,11 +41,9 @@ describe("Raspar class tests", () => {
 
 	it("runs api on custom port", () => {
 		expect.assertions(3);
-		jest.mock("../../src/api");
 
 		const PORT = 4000;
 		Raspar.commander(["", "", "api", "-p", PORT]);
-		const serve = require("../../src/api");
 
 		expect(serve).toBeCalled();
 		expect(serve).toBeCalledWith(PORT);
