@@ -30,7 +30,7 @@ module.exports = class Crawler {
 	browse(url, transform) {
 		return new Promise(async (resolve, reject) => {
 			const browser = await puppeteer.launch({
-				args: ["--disable-gpu", "--no-sandbox"],
+				args: ["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
 			});
 
 			try {
