@@ -12,6 +12,14 @@ Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more with 
 
 Raspar exports a resolver function which accepts a configuration object as argument and returns a promise for all available methods.
 
+### Installation
+
+In your terminal, simply run
+
+```bash
+npm i node-raspar
+```
+
 ### Configuration (options)
 
 ```javascript
@@ -28,16 +36,16 @@ const options = {
 
 ```javascript
 // with default options
-const Raspar = require("raspar")();
+const Raspar = require("node-raspar")();
 
 // or by passing custom options
-const Raspar = require("raspar")(options);
+const Raspar = require("node-raspar")(options);
 ```
 
 ### Using ES6
 
 ```javascript
-import raspar from "raspar";
+import raspar from "node-raspar";
 
 // with default options
 const Raspar = raspar();
