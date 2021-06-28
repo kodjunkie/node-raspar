@@ -31,8 +31,10 @@ exports.search = (req, res, next) => {
  */
 exports.list = (req, res, next) => {
 	const query = req.query;
+	const page = query.page || 1;
+
 	req.raspar
-		.list(query.page, query.genre)
+		.list(page, query.genre)
 		.then((response) => {
 			res.status(200).json(response);
 		})
