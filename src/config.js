@@ -1,7 +1,7 @@
-const { name, version } = require("../package.json");
+const { version } = require("../package.json");
 
 module.exports = {
-	name: name,
+	name: "raspar",
 
 	version: version,
 
@@ -26,7 +26,7 @@ module.exports = {
 			info: {
 				title: "Raspar API",
 				version: version,
-				description: `This documentations contains all ${name} endpoints.`,
+				description: `This documentations contains all raspar endpoints.`,
 				license: {
 					name: "MIT License",
 					url: "https://github.com/kodjunkie/raspar/blob/master/LICENSE",
