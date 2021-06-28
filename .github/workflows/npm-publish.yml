@@ -6,6 +6,9 @@ name: Raspar Publish
 on:
   release:
     types: [created]
+  push:
+    tags:
+      - "*"
 
 jobs:
   build:

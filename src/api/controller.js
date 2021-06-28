@@ -1,3 +1,5 @@
+const { validationResult } = require("express-validator");
+
 /**
  * Endpoint /search
  * @param  {} req
@@ -5,9 +7,16 @@
  * @param  {} next
  */
 exports.search = (req, res, next) => {
-	const query = req.query;
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res
+			.status(422)
+			.json({ error: { message: "Invalid query parameter" } });
+	}
+
+	const { query, page } = req.query;
 	req.raspar
-		.search(query.q, query.page)
+		.search(query, page)
 		.then((response) => {
 			res.status(200).json(response);
 		})
@@ -22,8 +31,10 @@ exports.search = (req, res, next) => {
  */
 exports.list = (req, res, next) => {
 	const query = req.query;
+	const page = query.page || 1;
+
 	req.raspar
-		.list(query.page, query.genre)
+		.list(page, query.genre)
 		.then((response) => {
 			res.status(200).json(response);
 		})

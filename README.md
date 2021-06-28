@@ -1,9 +1,15 @@
-# Raspar
+<h1 align="center">Raspar</h1>
+
+<div align="center">
 
 Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more
 with caching support for faster response time.
 
-## Use Programmatically
+[![Raspar CI](https://github.com/kodjunkie/raspar/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/kodjunkie/raspar/actions/workflows/node.js.yml) <a href="https://github.com/kodjunkie/raspar/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-red.svg" alt="License: MIT" height="20"></a>
+
+</div>
+
+## Use programmatically
 
 Raspar exports a resolver function which accepts a configuration object as argument and returns a promise for all available methods.
 
@@ -48,10 +54,10 @@ const Raspar = raspar(options);
 
 ## Available Methods
 
-| Drivers      | Search             | List                     |
-| ------------ | ------------------ | ------------------------ |
-| `zippyshare` | :heavy_check_mark: | :heavy_check_mark:       |
-| `1337x`      | :heavy_check_mark: | :heavy_multiplication_x: |
+| Drivers      | Search             | List               |
+| ------------ | ------------------ | ------------------ |
+| `zippyshare` | :heavy_check_mark: | :heavy_check_mark: |
+| `1337x`      | :heavy_check_mark: | :heavy_check_mark: |
 
 ## Running / Deploying the API
 
@@ -107,6 +113,11 @@ $ docker compose down
 ```bash
 $ npm test
 ```
+
+## API Documentation
+
+**NOTE:** `your-domain.com` depends on your server address.
+**Swagger:** [http://your-domain.com/docs](http://your-domain.com/docs)
 
 <!-- ### Heroku (In progress)
 

@@ -1,8 +1,10 @@
 const express = require("express");
-const Raspar = require("../lib/raspar");
+const swaggerJsdoc = require("swagger-jsdoc");
+const { swagger } = require("../config");
+const swaggerUi = require("swagger-ui-express-updated");
 const { notFoundHandler, errorHandler } = require("./utils");
-const controller = require("./controller");
-const { drivers, defaultDriver } = require("../config");
+const routes = require("./routes");
+const { resolver } = require("./middleware");
 
 module.exports = (port) => {
 	const app = express();
@@ -15,21 +17,11 @@ module.exports = (port) => {
 		next();
 	});
 
-	// Add driver instance to request
-	app.use((req, res, next) => {
-		const supportedDrivers = drivers;
-		const driver = req.query.driver || defaultDriver;
-		if (!supportedDrivers.includes(driver)) {
-			const error = new Error(`Driver not found: ${driver}`);
-			next(error);
-		}
+	// API doc
+	const swaggerSpecs = swaggerJsdoc(swagger);
+	app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
-		req.raspar = Raspar.resolve({ driver });
-		next();
-	});
-
-	app.get("/search", controller.search);
-	app.get("/list", controller.list);
+	app.use(resolver, routes);
 
 	app.use(notFoundHandler);
 
