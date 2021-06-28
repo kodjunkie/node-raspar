@@ -110,7 +110,7 @@ module.exports = class ZippyShare extends Crawler {
 			const cachedResponse = await this.cache.get(cacheKey);
 			if (cachedResponse) return cachedResponse;
 
-			let data = [];
+			let data;
 			if (genre) data = await this.performSearch(genre, page);
 			else {
 				const response = await this.browse(this.endpoint, function () {
@@ -133,7 +133,7 @@ module.exports = class ZippyShare extends Crawler {
 					return { data: results };
 				});
 
-				data = response.data;
+				data = { data: response.data };
 			}
 
 			await this.cache.set(cacheKey, data);
