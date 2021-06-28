@@ -2,8 +2,7 @@
 
 <div align="center">
 
-Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more
-with caching support for faster response time.
+Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more with caching support.
 
 [![Raspar CI](https://github.com/kodjunkie/raspar/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/kodjunkie/raspar/actions/workflows/node.js.yml) <a href="https://github.com/kodjunkie/raspar/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-red.svg" alt="License: MIT" height="20"></a>
 
@@ -117,7 +116,7 @@ $ npm test
 ## API Documentation
 
 **NOTE:** `your-domain.com` depends on your server address.
-**Swagger:** [http://your-domain.com/docs](http://your-domain.com/docs)
+Swagger: [http://your-domain.com/docs](http://your-domain.com/docs)
 
 <!-- ### Heroku (In progress)
 
