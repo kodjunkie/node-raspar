@@ -116,7 +116,8 @@ $ npm test
 ## API Documentation
 
 **NOTE:** `your-domain.com` depends on your server address.
-Swagger: [http://your-domain.com/docs](http://your-domain.com/docs)
+
+**Swagger:** [http://your-domain.com/docs](http://your-domain.com/docs)
 
 <!-- ### Heroku (In progress)
 
