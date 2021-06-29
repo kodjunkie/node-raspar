@@ -1,4 +1,4 @@
-FROM node:14-slim
+FROM node:lts-slim
 
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
@@ -22,7 +22,7 @@ RUN npm install -g pm2
 RUN npm install
 
 # Setup cache directory
-RUN mkdir -p temp && chmod -R 775 temp/
+RUN mkdir -p temp && chmod -R 777 temp/
 
 EXPOSE 3000
 
