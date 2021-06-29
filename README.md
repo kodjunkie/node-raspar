@@ -77,7 +77,7 @@ $ git clone https://github.com/kodjunkie/raspar.git
 # change directory
 $ cd raspar
 # chmod the cache directory
-$ sudo chmod -R 775 temp/
+$ sudo chmod -R 777 temp/
 ```
 
 ### Without Docker
