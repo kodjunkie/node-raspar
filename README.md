@@ -123,9 +123,13 @@ $ npm test
 
 ## API Documentation
 
-**NOTE:** `your-domain.com` depends on your server address.
+**NOTE:** `your-domain.com` depends on the address your server is running on.
 
 **Swagger:** [http://your-domain.com/docs](http://your-domain.com/docs)
+
+## License
+
+This project is opened under the [MIT 2.0 License](https://github.com/kodjunkie/raspar/blob/master/LICENSE) which allows very broad use for both academic and commercial purposes.
 
 <!-- ### Heroku (In progress)
 
