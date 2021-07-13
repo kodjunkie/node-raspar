@@ -24,9 +24,9 @@ npm i node-raspar
 
 ```javascript
 const options = {
-	driver: "1337x", // driver (default: zippyshare)
-	cache: { options: { ttl: 60 * 8 } } || Boolean,
+	driver: "1337x", // default: zippyshare
 	// cache configuration, to disable caching set to "false"
+	cache: { options: { ttl: 60 * 8 } } || Boolean,
 };
 ```
 
@@ -52,6 +52,21 @@ const Raspar = raspar();
 
 // or by passing custom options
 const Raspar = raspar(options);
+```
+
+### Examples
+
+```javascript
+// Get list results
+// Using Promises
+const page = 1;
+Raspar.list(page)
+	.then((data) => console.log(data))
+	.catch((error) => console.error(error));
+
+// Get search results
+// Using async / await in an async function
+const data = await Raspar.search("avengers", page);
 ```
 
 ## Available Drivers
@@ -115,6 +130,13 @@ $ docker compose up
 $ docker compose down
 ```
 
+<!-- ### Heroku (In progress)
+
+Heroku requires some additional dependencies that aren't included on the Linux box that Heroku spins up for you.
+To add the dependencies on deploy, add the Puppeteer Heroku buildpack to the list of buildpacks for your app under Settings > Buildpacks.
+
+The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack` -->
+
 ## Tests
 
 ```bash
@@ -130,10 +152,3 @@ $ npm test
 ## License
 
 This project is opened under the [MIT 2.0 License](https://github.com/kodjunkie/raspar/blob/master/LICENSE) which allows very broad use for both academic and commercial purposes.
-
-<!-- ### Heroku (In progress)
-
-Heroku requires some additional dependencies that aren't included on the Linux box that Heroku spins up for you.
-To add the dependencies on deploy, add the Puppeteer Heroku buildpack to the list of buildpacks for your app under Settings > Buildpacks.
-
-The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack` -->
