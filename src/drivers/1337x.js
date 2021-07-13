@@ -7,30 +7,6 @@ module.exports = class One337x extends Crawler {
 	}
 
 	/**
-	 * @param  string url
-	 */
-	getLinks(url) {
-		return this.browse(url, function () {
-			var links = [];
-
-			// Get response data
-			$("table.table-list tbody tr").each(function () {
-				var path = $(this)
-						.children("td.name")
-						.find("a:nth(1)")
-						.attr("href")
-						.trim(),
-					seeds = $(this).children("td.seeds").text().trim(),
-					leeches = $(this).children("td.leeches").text().trim(),
-					size = $(this).children("td.size").contents().get(0).nodeValue.trim();
-				if (path && size) links.push({ size, path, seeds, leeches });
-			});
-
-			return { links: links };
-		});
-	}
-
-	/**
 	 * Search torrent
 	 * @param  string query
 	 * @param  Number page=1
@@ -45,15 +21,36 @@ module.exports = class One337x extends Crawler {
 			if (cachedResponse) return cachedResponse;
 
 			const data = [];
+			const { links } = await this.scrape(
+				`${this.endpoint}/search/${query}/${page}/`,
+				function () {
+					var links = [];
 
-			const { links } = await this.getLinks(
-				`${this.endpoint}/search/${query}/${page}/`
+					// Get response data
+					$("table.table-list tbody tr").each(function () {
+						var path = $(this)
+								.children("td.name")
+								.find("a:nth(1)")
+								.attr("href")
+								.trim(),
+							seeds = $(this).children("td.seeds").text().trim(),
+							leeches = $(this).children("td.leeches").text().trim(),
+							size = $(this)
+								.children("td.size")
+								.contents()
+								.get(0)
+								.nodeValue.trim();
+						if (path && size) links.push({ size, path, seeds, leeches });
+					});
+
+					return { links: links };
+				}
 			);
 
 			if (!links) return { data };
 
 			const promises = links.map(async (link) => {
-				const result = await this.browse(
+				const result = await this.scrape(
 					this.endpoint + link.path,
 					function () {
 						var name = $("div.box-info-heading h1").text().trim();
@@ -89,6 +86,7 @@ module.exports = class One337x extends Crawler {
 			});
 
 			await Promise.all(promises);
+			await this.browser.close();
 			await this.cache.set(cacheKey, { data });
 
 			return { data };
@@ -109,12 +107,36 @@ module.exports = class One337x extends Crawler {
 			if (cachedResponse) return cachedResponse;
 
 			const data = [];
-			const { links } = await this.getLinks(`${this.endpoint}/home/`);
+			const { links } = await this.scrape(
+				`${this.endpoint}/home/`,
+				function () {
+					var links = [];
+
+					// Get response data
+					$("table.table-list:nth(0) tbody tr").each(function () {
+						var path = $(this)
+								.children("td.name")
+								.find("a:nth(1)")
+								.attr("href")
+								.trim(),
+							seeds = $(this).children("td.seeds").text().trim(),
+							leeches = $(this).children("td.leeches").text().trim(),
+							size = $(this)
+								.children("td.size")
+								.contents()
+								.get(0)
+								.nodeValue.trim();
+						if (path && size) links.push({ size, path, seeds, leeches });
+					});
+
+					return { links: links };
+				}
+			);
 
 			if (!links) return { data };
 
 			const promises = links.map(async (link) => {
-				const result = await this.browse(
+				const result = await this.scrape(
 					this.endpoint + link.path,
 					function () {
 						var name = $("div.box-info-heading h1").text().trim();
@@ -150,6 +172,7 @@ module.exports = class One337x extends Crawler {
 			});
 
 			await Promise.all(promises);
+			await this.browser.close();
 			await this.cache.set(cacheKey, { data });
 
 			return { data };

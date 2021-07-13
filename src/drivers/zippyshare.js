@@ -14,7 +14,7 @@ module.exports = class ZippyShare extends Crawler {
 	async performSearch(query, page = 1) {
 		const data = [];
 
-		const { links } = await this.browse(
+		const { links } = await this.scrape(
 			`${this.endpoint}/zippyshare/search?q=${query}#gsc.tab=0&gsc.q=${query}&gsc.page=${page}`,
 			function () {
 				var links = [];
@@ -33,7 +33,7 @@ module.exports = class ZippyShare extends Crawler {
 		if (!links) return { data };
 
 		const promises = links.map(async (link) => {
-			const result = await this.browse(link, function () {
+			const result = await this.scrape(link, function () {
 				var name = $("tbody div#lrbox .left")
 					.children(":nth-child(4)")
 					.text()
@@ -88,6 +88,7 @@ module.exports = class ZippyShare extends Crawler {
 
 			// Get and cache the response
 			const data = await this.performSearch(query, page);
+			await this.browser.close();
 			await this.cache.set(cacheKey, data);
 
 			return data;
@@ -113,7 +114,7 @@ module.exports = class ZippyShare extends Crawler {
 			let data;
 			if (genre) data = await this.performSearch(genre, page);
 			else {
-				const response = await this.browse(this.endpoint, function () {
+				const response = await this.scrape(this.endpoint, function () {
 					var results = [];
 
 					// Get response data
@@ -136,7 +137,9 @@ module.exports = class ZippyShare extends Crawler {
 				data = { data: response.data };
 			}
 
+			await this.browser.close();
 			await this.cache.set(cacheKey, data);
+
 			return data;
 		} catch (error) {
 			return Promise.reject(error);
