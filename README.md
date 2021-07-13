@@ -25,8 +25,8 @@ npm i node-raspar
 ```javascript
 const options = {
 	driver: "1337x", // default: zippyshare
-	cache: { options: { ttl: 60 * 8 } } || Boolean,
 	// cache configuration, to disable caching set to "false"
+	cache: { options: { ttl: 60 * 8 } } || Boolean,
 };
 ```
 
@@ -52,6 +52,21 @@ const Raspar = raspar();
 
 // or by passing custom options
 const Raspar = raspar(options);
+```
+
+### Examples
+
+```javascript
+// Get list results
+// Using Promises
+const page = 1;
+Raspar.list(page)
+	.then((data) => console.log(data))
+	.catch((error) => console.error(error));
+
+// Get search results
+// Using async / await in an async function
+const data = await Raspar.search("avengers", page);
 ```
 
 ## Available Drivers
