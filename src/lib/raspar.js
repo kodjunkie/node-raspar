@@ -1,4 +1,3 @@
-process.setMaxListeners(Infinity);
 const { defaultDriver } = require("../config");
 
 module.exports = class Raspar {
@@ -11,7 +10,8 @@ module.exports = class Raspar {
 				? options.driver
 				: defaultDriver;
 		try {
-			const DriverObject = require(`../drivers/${driver.trim().toLowerCase()}`);
+			const name = driver.trim().toLowerCase();
+			const DriverObject = require(`../drivers/${name}`);
 			return new DriverObject(options);
 		} catch (error) {
 			console.error(`Driver not found: ${driver}`);
