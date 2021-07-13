@@ -19,8 +19,16 @@
 	"keywords": [
 		"Music",
 		"API",
-		"Downlaod",
-		"Search"
+		"Download",
+		"Search",
+		"Torrent",
+		"Mp3",
+		"mp4",
+		"Video",
+		"Scraping",
+		"Crawling",
+		"Spider",
+		"Free"
 	],
 	"author": "Lawrence Onah <paplow01@gmail.com>",
 	"license": "MIT",
