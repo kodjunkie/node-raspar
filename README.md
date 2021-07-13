@@ -58,7 +58,7 @@ const Raspar = raspar(options);
 
 ```javascript
 // Get list results
-// Using Promises
+// Using then / catch
 const page = 1;
 Raspar.list(page)
 	.then((data) => console.log(data))
