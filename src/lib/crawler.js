@@ -55,6 +55,7 @@ module.exports = class Crawler {
 			try {
 				await this.launchBrowser();
 				const page = await this.browser.newPage();
+				await page.setCacheEnabled(false);
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
 				await page.addScriptTag({ path: require.resolve("jquery") });
 				let response = await page.evaluate(transform);
