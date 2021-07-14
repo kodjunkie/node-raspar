@@ -4,6 +4,9 @@ const cacheConfig = require("../config/cache");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
 
+puppeteer.use(StealthPlugin());
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+
 module.exports = class Crawler {
 	constructor(options) {
 		// Configure cache
@@ -33,9 +36,6 @@ module.exports = class Crawler {
 	 */
 	async launchBrowser() {
 		if (!this.isLaunched) {
-			puppeteer.use(StealthPlugin());
-			puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
-
 			this.browser = await puppeteer.launch({
 				args: ["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
 				headless: true,
