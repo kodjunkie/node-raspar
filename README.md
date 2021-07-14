@@ -1,4 +1,4 @@
-<h1 align="center">Raspar</h1>
+<h1 align="center">Node Raspar</h1>
 
 <div align="center">
 
@@ -26,7 +26,7 @@ npm i node-raspar
 const options = {
 	driver: "1337x", // default: zippyshare
 	// cache configuration, to disable caching set to "false"
-	cache: { options: { ttl: 60 * 8 } } || Boolean,
+	cache: { options: { ttl: 60 * 8 } } || true || false,
 };
 ```
 
