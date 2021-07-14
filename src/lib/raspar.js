@@ -1,3 +1,4 @@
+process.setMaxListeners(Infinity);
 const { defaultDriver } = require("../config");
 
 module.exports = class Raspar {
