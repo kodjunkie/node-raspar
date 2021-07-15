@@ -2,10 +2,10 @@ const Cache = require("./cache");
 const puppeteer = require("puppeteer-extra");
 const cacheConfig = require("../config/cache");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
-// const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
 
 puppeteer.use(StealthPlugin());
-// puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
 module.exports = class Crawler {
 	constructor(options) {
