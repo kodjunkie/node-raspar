@@ -10,7 +10,7 @@ Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more with 
 
 ## Use programmatically
 
-Raspar exports a resolver function which accepts a configuration object as argument and returns a promise for all available methods.
+`node-raspar` exports a resolver function which accepts the configuration object as argument and returns a promise for all available methods.
 
 ### Installation
 
