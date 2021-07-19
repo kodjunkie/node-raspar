@@ -1,7 +1,7 @@
 {
 	"name": "node-raspar",
-	"version": "1.1.5",
-	"description": "Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more with caching support.",
+	"version": "1.1.6",
+	"description": "Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more with cache support.",
 	"main": "index.js",
 	"scripts": {
 		"start": "node . api",
@@ -14,7 +14,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/kodjunkie/raspar.git"
+		"url": "git+https://github.com/kodjunkie/node-raspar.git"
 	},
 	"keywords": [
 		"Music",
@@ -33,9 +33,9 @@
 	"author": "Lawrence Onah <paplow01@gmail.com>",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/kodjunkie/raspar/issues"
+		"url": "https://github.com/kodjunkie/node-raspar/issues"
 	},
-	"homepage": "https://github.com/kodjunkie/raspar#readme",
+	"homepage": "https://github.com/kodjunkie/node-raspar#readme",
 	"dependencies": {
 		"cache-manager": "^3.4.4",
 		"cache-manager-fs-hash": "0.0.9",
@@ -43,7 +43,7 @@
 		"express": "^4.17.1",
 		"express-validator": "^6.12.0",
 		"jquery": "^3.6.0",
-		"puppeteer": "^10.0.0",
+		"puppeteer": "^10.1.0",
 		"puppeteer-extra": "^3.1.18",
 		"puppeteer-extra-plugin-adblocker": "^2.11.11",
 		"puppeteer-extra-plugin-stealth": "^2.7.8",
@@ -51,14 +51,14 @@
 		"swagger-ui-express-updated": "^4.1.8"
 	},
 	"devDependencies": {
-		"@types/jest": "^26.0.23",
-		"eslint": "^7.28.0",
+		"@types/jest": "^26.0.24",
+		"eslint": "^7.31.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^3.4.0",
-		"jest": "^27.0.5",
-		"nodemon": "^2.0.7",
-		"prettier": "^2.3.1"
+		"jest": "^27.0.6",
+		"nodemon": "^2.0.12",
+		"prettier": "^2.3.2"
 	},
 	"bin": "./index.js",
 	"jest": {
