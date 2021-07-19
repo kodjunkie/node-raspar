@@ -1,4 +1,4 @@
-<h1 align="center">Node Raspar</h1>
+<h1 align="center">node-raspar</h1>
 
 <div align="center">
 
