@@ -76,10 +76,10 @@ const data = await Raspar.search("avengers", page);
 
 ## Available Methods
 
-| Drivers      | Search             | List               |
-| ------------ | ------------------ | ------------------ |
-| `zippyshare` | :heavy_check_mark: | :heavy_check_mark: |
-| `1337x`      | :heavy_check_mark: | :heavy_check_mark: |
+| Drivers      | `search(query, page)` | `list(page)`       |
+| ------------ | --------------------- | ------------------ |
+| `zippyshare` | :heavy_check_mark:    | :heavy_check_mark: |
+| `1337x`      | :heavy_check_mark:    | :heavy_check_mark: |
 
 ## Running / Deploying the API
 
