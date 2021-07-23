@@ -55,7 +55,6 @@ module.exports = class ZippyShare extends Crawler {
 				var size = size1 || size2;
 				var extension = decodeURIComponent(path).split(".").pop();
 				var supportedExt = [
-					"m4a",
 					"mp3",
 					"aac",
 					"flac",
