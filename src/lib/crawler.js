@@ -59,7 +59,9 @@ module.exports = class Crawler {
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
 				await page.addScriptTag({ path: require.resolve("jquery") });
 				const response = await page.evaluate(transform);
-				await page.close();
+				// NOTE Closing the page immediately after scraping seem to occasionally interrupt the browser execution context
+				// Ensure to close the entire browser at the driver level after scraping
+				// await page.close();
 				return resolve(response);
 			} catch (error) {
 				return reject(error);
