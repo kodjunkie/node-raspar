@@ -50,13 +50,30 @@ module.exports = class ZippyShare extends Crawler {
 
 				var domain = $("head meta[property='og:url']")
 					.attr("content")
-					.split("/v/")[0];
+					.split("/v/");
 
 				var size = size1 || size2;
+				var extension = decodeURIComponent(path).split(".").pop();
+				var supportedExt = [
+					"m4a",
+					"mp3",
+					"aac",
+					"flac",
+					"wma",
+					"wav",
+					"ogg",
+					"flv",
+					"mp4",
+					"webm",
+				];
 
 				return {
 					name: name.substring(0, name.length - 2),
-					url: "https:" + domain + path,
+					url: supportedExt.includes(extension)
+						? `https:${domain[0]}/downloadAudioHQ?key=${
+								domain[1].split("/")[0]
+						  }&amp;time=`
+						: `https:${domain[0] + path}`,
 					size: size.replace("3)", ""),
 					path: path,
 				};
