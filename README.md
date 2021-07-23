@@ -130,12 +130,12 @@ $ docker compose up
 $ docker compose down
 ```
 
-<!-- ### Heroku (In progress)
+### Heroku
 
 Heroku requires some additional dependencies that aren't included on the Linux box that Heroku spins up for you.
 To add the dependencies on deploy, add the Puppeteer Heroku buildpack to the list of buildpacks for your app under Settings > Buildpacks.
 
-The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack` -->
+The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack`
 
 ## Tests
 
