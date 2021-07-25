@@ -12,4 +12,6 @@ module.exports = {
 	cache: require("./cache"),
 
 	swagger: require("./swagger"),
+
+	perPage: 10,
 };

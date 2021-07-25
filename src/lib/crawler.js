@@ -1,6 +1,6 @@
 const Cache = require("./cache");
 const puppeteer = require("puppeteer-extra");
-const cacheConfig = require("../config/cache");
+const { cache: cacheConfig, perPage } = require("../config");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
 
@@ -16,6 +16,9 @@ module.exports = class Crawler {
 
 		// Browser launch check
 		this.isLaunched = false;
+
+		// Results per page
+		this.perPage = options.perPage || perPage;
 
 		// Throw error for methods not found
 		return new Proxy(this, {
