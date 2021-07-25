@@ -18,7 +18,7 @@ module.exports = class Crawler {
 		this.isLaunched = false;
 
 		// Results per page
-		this.perPage = options.perPage || perPage;
+		this.perPage = options && options.perPage ? options.perPage : perPage;
 
 		// Throw error for methods not found
 		return new Proxy(this, {
