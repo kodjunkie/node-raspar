@@ -25,7 +25,7 @@ npm i node-raspar
 ```javascript
 const options = {
 	driver: "1337x", // default: zippyshare
-	perPage: 12, // Results per page (default: 12)
+	perPage: 12, // Results per page (default: 10)
 	cache: { options: { ttl: 60 * 8 } } || true || false,
 	// cache configuration, to disable caching set to "false"
 };
