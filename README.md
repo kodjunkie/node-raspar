@@ -2,7 +2,7 @@
 
 <div align="center">
 
-Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more with cache support.
+A node.js API for scraping lossless mp3s, albums, EDM tracks, torrents and more with cache support.
 
 [![Raspar CI](https://github.com/kodjunkie/raspar/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/kodjunkie/raspar/actions/workflows/node.js.yml) <a href="https://github.com/kodjunkie/raspar/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" height="20"></a>
 
@@ -10,7 +10,7 @@ Node API for scraping lossless mp3s, albums, EDM tracks, torrents and more with 
 
 ## Use programmatically
 
-`node-raspar` exports a resolver function which accepts the configuration object as argument and returns a promise for all available methods.
+node-raspar exports a resolver function which accepts the configuration object as an argument and returns a promise for all available methods.
 
 ### Installation
 
@@ -25,8 +25,9 @@ npm i node-raspar
 ```javascript
 const options = {
 	driver: "1337x", // default: zippyshare
-	// cache configuration, to disable caching set to "false"
+	perPage: 12, // Results per page (default: 12)
 	cache: { options: { ttl: 60 * 8 } } || true || false,
+	// cache configuration, to disable caching set to "false"
 };
 ```
 
