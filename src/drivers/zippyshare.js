@@ -14,7 +14,7 @@ module.exports = class ZippyShare extends Crawler {
 	async performSearch(query, page = 1) {
 		const data = [];
 
-		const { links } = await this.scrape(
+		let { links } = await this.scrape(
 			`${this.endpoint}/zippyshare/search?q=${query}#gsc.tab=0&gsc.q=${query}&gsc.page=${page}`,
 			function () {
 				var links = [];
@@ -31,6 +31,7 @@ module.exports = class ZippyShare extends Crawler {
 		);
 
 		if (!links) return { data };
+		if (links.length > this.perPage) links = links.slice(0, this.perPage);
 
 		const promises = links.map(async (link) => {
 			const result = await this.scrape(link, function () {
@@ -54,21 +55,11 @@ module.exports = class ZippyShare extends Crawler {
 
 				var size = size1 || size2;
 				var extension = decodeURIComponent(path).split(".").pop();
-				var supportedExt = [
-					"mp3",
-					"aac",
-					"flac",
-					"wma",
-					"wav",
-					"ogg",
-					"flv",
-					"mp4",
-					"webm",
-				];
+				var supportedExt = ["mp3", "flac", "wma", "wav", "ogg", "aiff", "alac"];
 
 				return {
 					name: name.substring(0, name.length - 2),
-					url: supportedExt.includes(extension)
+					url: supportedExt.includes(extension.toLowerCase())
 						? `https:${domain[0]}/downloadAudioHQ?key=${
 								domain[1].split("/")[0]
 						  }&amp;time=`
@@ -98,7 +89,7 @@ module.exports = class ZippyShare extends Crawler {
 			query = query.replace(" ", "+");
 
 			// Get from cache first
-			const cacheKey = query ? query + page + this.endpoint : this.endpoint;
+			const cacheKey = query + page + this.endpoint;
 			const cachedResponse = await this.cache.get(cacheKey);
 			if (cachedResponse) return cachedResponse;
 
@@ -123,7 +114,7 @@ module.exports = class ZippyShare extends Crawler {
 			if (genre) genre = genre.replace(" ", "+");
 
 			// Get from cache first
-			const cacheKey = genre ? genre + page + this.endpoint : this.endpoint;
+			const cacheKey = genre + page + this.endpoint;
 			const cachedResponse = await this.cache.get(cacheKey);
 			if (cachedResponse) return cachedResponse;
 

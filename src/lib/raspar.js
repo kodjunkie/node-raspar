@@ -6,10 +6,7 @@ module.exports = class Raspar {
 	 * @param  {} options={}
 	 */
 	static resolve(options) {
-		const driver =
-			options && typeof options.driver == "string"
-				? options.driver
-				: defaultDriver;
+		const driver = !options || !options.driver ? defaultDriver : options.driver;
 		try {
 			const name = driver.trim().toLowerCase();
 			const DriverObject = require(`../drivers/${name}`);
