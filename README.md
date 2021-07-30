@@ -61,17 +61,17 @@ const Raspar = raspar(options);
 // Get list results
 // Using then / catch
 const page = 1;
-Raspar.list(page)
-	.then((data) => console.log(data))
-	.catch((error) => console.error(error));
+Raspar.list(page).then(console.log).catch(console.error);
 
 // When using zippyshare driver
-// You can pass a genre as the second argument to the list method
-const data = await Raspar.list(page, "Hip Hop");
+// You need to pass a genre as the second argument to the list method
+// Calling it without passing the genre returns a list of available genres
+Raspar.list(page, "Hip Hop").then(console.log).catch(console.error);
 
 // Get search results
 // Using async / await in an async function
-const data = await Raspar.search("avengers", page);
+const results = await Raspar.search("avengers", page);
+console.log(results);
 ```
 
 ## Available Drivers
