@@ -93,7 +93,7 @@ In terminal run the following commands to get the code on your machine.
 
 ```bash
 # first clone the repo
-$ git clone https://github.com/kodjunkie/node-raspar.git
+$ git clone https://github.com/kodjunkie/node-raspar.git raspar
 # change directory
 $ cd raspar
 # chmod the cache directory
