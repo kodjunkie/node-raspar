@@ -65,6 +65,10 @@ Raspar.list(page)
 	.then((data) => console.log(data))
 	.catch((error) => console.error(error));
 
+// When using zippyshare driver
+// You can pass a genre as the second argument to the list method
+const data = await Raspar.list(page, "Hip Hop");
+
 // Get search results
 // Using async / await in an async function
 const data = await Raspar.search("avengers", page);
@@ -72,15 +76,15 @@ const data = await Raspar.search("avengers", page);
 
 ## Available Drivers
 
-- `zippyshare (default)`
-- `1337x`
+- zippyshare (default)
+- 1337x
 
 ## Available Methods
 
-| Drivers      | `search(query, page)` | `list(page)`       |
-| ------------ | --------------------- | ------------------ |
-| `zippyshare` | :heavy_check_mark:    | :heavy_check_mark: |
-| `1337x`      | :heavy_check_mark:    | :heavy_check_mark: |
+| Drivers      | search(query, page) | list(page)         |
+| ------------ | ------------------- | ------------------ |
+| `zippyshare` | :heavy_check_mark:  | :heavy_check_mark: |
+| `1337x`      | :heavy_check_mark:  | :heavy_check_mark: |
 
 ## Running / Deploying the API
 
