@@ -125,7 +125,7 @@ module.exports = class ZippyShare extends Crawler {
 					var results = [];
 
 					// Get response data
-					$("div.home-cool:nth(0) .m12")
+					$("div.home-cool:nth(0)")
 						.find("a")
 						.each(function () {
 							var name = $(this).children(".chip").text().trim(),
