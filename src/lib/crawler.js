@@ -2,8 +2,10 @@ const Cache = require("./cache");
 const puppeteer = require("puppeteer-extra");
 const { cache: cacheConfig, perPage } = require("../config");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
+const AnonymizeUA = require("puppeteer-extra-plugin-anonymize-ua");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
 
+puppeteer.use(AnonymizeUA({ stripHeadless: true, makeWindows: true }));
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
@@ -40,7 +42,16 @@ module.exports = class Crawler {
 	async launchBrowser() {
 		if (!this.isLaunched) {
 			this.browser = await puppeteer.launch({
-				args: ["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
+				args: [
+					"--disable-gpu",
+					"--no-sandbox",
+					"--disable-dev-shm-usage",
+					"--disable-setuid-sandbox",
+					"--disable-infobars",
+					"--window-position=0,0",
+					"--ignore-certifcate-errors",
+					"--ignore-certifcate-errors-spki-list",
+				],
 				headless: true,
 			});
 
