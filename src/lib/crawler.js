@@ -51,8 +51,16 @@ module.exports = class Crawler {
 					"--window-position=0,0",
 					"--ignore-certifcate-errors",
 					"--ignore-certifcate-errors-spki-list",
+					"--window-size=1400,900",
+					"--remote-debugging-port=9222",
+					"--remote-debugging-address=0.0.0.0",
+					"--disable-gpu",
+					"--disable-features=IsolateOrigins,site-per-process",
+					"--blink-settings=imagesEnabled=true",
 				],
 				headless: true,
+				ignoreHTTPSErrors: true,
+				slowMo: 0,
 			});
 
 			this.isLaunched = true;
