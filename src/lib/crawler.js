@@ -51,7 +51,9 @@ module.exports = class Crawler {
 					"--window-position=0,0",
 					"--ignore-certifcate-errors",
 					"--ignore-certifcate-errors-spki-list",
-					"--window-size=1400,900",
+					`--window-size=${1024 + Math.floor(Math.random() * 100)},${
+						768 + Math.floor(Math.random() * 100)
+					}`,
 					"--disable-features=IsolateOrigins,site-per-process",
 					"--blink-settings=imagesEnabled=true",
 				],
@@ -78,9 +80,8 @@ module.exports = class Crawler {
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
 				await page.addScriptTag({ path: require.resolve("jquery") });
 				const response = await page.evaluate(transform);
-				// NOTE Closing the page immediately after scraping seem to occasionally interrupt the browser execution context
-				// Ensure to close the entire browser at the driver level after scraping
-				// await page.close();
+				const cookies = await page.cookies();
+				await page.deleteCookie(...cookies);
 				return resolve(response);
 			} catch (error) {
 				return reject(error);
