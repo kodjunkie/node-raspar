@@ -78,10 +78,9 @@ module.exports = class Crawler {
 				const page = await this.browser.newPage();
 				await page.setCacheEnabled(false);
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
+				await page._client.send("Network.clearBrowserCookies");
 				await page.addScriptTag({ path: require.resolve("jquery") });
 				const response = await page.evaluate(transform);
-				const cookies = await page.cookies();
-				await page.deleteCookie(...cookies);
 				return resolve(response);
 			} catch (error) {
 				return reject(error);
