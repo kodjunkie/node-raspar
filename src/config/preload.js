@@ -12,3 +12,11 @@ Object.defineProperty(navigator, "plugins", {
 		return [1, 2, 3, 4, 5];
 	},
 });
+
+// overwrite the `chrome` property to use a custom getter
+Object.defineProperty(window, "chrome", {
+	get: function () {
+		// this just needs to have `length > 0`, but we could mock the plugins too
+		return true;
+	},
+});

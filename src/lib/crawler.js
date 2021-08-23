@@ -5,7 +5,7 @@ const { cache: cacheConfig, perPage } = require("../config");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const AnonymizeUA = require("puppeteer-extra-plugin-anonymize-ua");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
-const preloadFile = readFileSync(__dirname + "/../page-preload.js", "utf8");
+const preloadFile = readFileSync(__dirname + "/../config/preload.js", "utf8");
 
 puppeteer.use(AnonymizeUA({ stripHeadless: true, makeWindows: true }));
 puppeteer.use(StealthPlugin());
@@ -80,11 +80,11 @@ module.exports = class Crawler {
 				await this.launchBrowser();
 				const page = await this.browser.newPage();
 				await page.setCacheEnabled(false);
+				await page._client.send("Network.clearBrowserCookies");
 				await page.evaluateOnNewDocument(preloadFile);
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
 				await page.addScriptTag({ path: require.resolve("jquery") });
 				const response = await page.evaluate(transform);
-				await page._client.send("Network.clearBrowserCookies");
 				return resolve(response);
 			} catch (error) {
 				return reject(error);
