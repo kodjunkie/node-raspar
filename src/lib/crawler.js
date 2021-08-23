@@ -1,9 +1,11 @@
 const Cache = require("./cache");
+const { readFileSync } = require("fs");
 const puppeteer = require("puppeteer-extra");
 const { cache: cacheConfig, perPage } = require("../config");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const AnonymizeUA = require("puppeteer-extra-plugin-anonymize-ua");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+const preloadFile = readFileSync(__dirname + "/../config/preload.js", "utf8");
 
 puppeteer.use(AnonymizeUA({ stripHeadless: true, makeWindows: true }));
 puppeteer.use(StealthPlugin());
@@ -51,8 +53,16 @@ module.exports = class Crawler {
 					"--window-position=0,0",
 					"--ignore-certifcate-errors",
 					"--ignore-certifcate-errors-spki-list",
+					`--window-size=${1024 + Math.floor(Math.random() * 100)},${
+						768 + Math.floor(Math.random() * 100)
+					}`,
+					"--disable-features=IsolateOrigins,site-per-process",
+					"--blink-settings=imagesEnabled=true",
 				],
 				headless: true,
+				ignoreHTTPSErrors: true,
+				slowMo: 0,
+				userDataDir: "./temp",
 			});
 
 			this.isLaunched = true;
@@ -70,12 +80,11 @@ module.exports = class Crawler {
 				await this.launchBrowser();
 				const page = await this.browser.newPage();
 				await page.setCacheEnabled(false);
+				await page._client.send("Network.clearBrowserCookies");
+				await page.evaluateOnNewDocument(preloadFile);
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
 				await page.addScriptTag({ path: require.resolve("jquery") });
 				const response = await page.evaluate(transform);
-				// NOTE Closing the page immediately after scraping seem to occasionally interrupt the browser execution context
-				// Ensure to close the entire browser at the driver level after scraping
-				// await page.close();
 				return resolve(response);
 			} catch (error) {
 				return reject(error);
