@@ -53,16 +53,12 @@ module.exports = class Crawler {
 					"--window-position=0,0",
 					"--ignore-certifcate-errors",
 					"--ignore-certifcate-errors-spki-list",
-					`--window-size=${1024 + Math.floor(Math.random() * 100)},${
-						768 + Math.floor(Math.random() * 100)
-					}`,
 					"--disable-features=IsolateOrigins,site-per-process",
 					"--blink-settings=imagesEnabled=true",
 				],
 				headless: true,
 				ignoreHTTPSErrors: true,
 				slowMo: 0,
-				userDataDir: "./temp",
 			});
 
 			this.isLaunched = true;
