@@ -1,6 +1,6 @@
 {
 	"name": "node-raspar",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"description": "A node.js API for scraping lossless mp3s, albums, EDM tracks, torrents and more with cache support.",
 	"main": "index.js",
 	"scripts": {

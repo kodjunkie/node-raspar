@@ -45,26 +45,25 @@ module.exports = class ZippyShare extends Crawler {
 				var size1 = $("tbody div#lrbox .left")
 					.children(":nth-child(6)")
 					.find("font:nth-child(2)")
-					.text();
+					.text()
+					.trim();
 
-				var size2 = $("tbody div#lrbox .left").children(":nth-child(7)").text();
+				var size2 = $("tbody div#lrbox .left")
+					.children(":nth-child(7)")
+					.text()
+					.trim();
 
 				var domain = $("head meta[property='og:url']")
 					.attr("content")
 					.split("/v/");
 
 				var size = size1 || size2;
-				var extension = decodeURIComponent(path).split(".").pop();
-				var supportedExt = ["mp3", "flac", "wma", "wav", "ogg", "aiff", "alac"];
 
 				return {
 					name: name.substring(0, name.length - 2),
-					url: supportedExt.includes(extension.toLowerCase())
-						? `https:${domain[0]}/downloadAudioHQ?key=${
-								domain[1].split("/")[0]
-						  }&amp;time=`
-						: `https:${domain[0] + path}`,
+					url: "https:" + domain[0] + path,
 					size: size.replace("3)", ""),
+					key: domain[1].split("/")[0],
 					path: path,
 				};
 			});
@@ -134,7 +133,7 @@ module.exports = class ZippyShare extends Crawler {
 							if (name && url)
 								results.push({
 									name,
-									url: `https://www.zippysharedjs.com/${url}`,
+									url: `https://www.zippysharedjs.com/${url.replace(" ", "+")}`,
 								});
 						});
 
