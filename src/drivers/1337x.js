@@ -58,7 +58,7 @@ module.exports = class One337x extends Crawler {
 
 						var description = $("div#mCSB_1_container p").text().trim();
 
-						var url = $("ul.dropdown-menu li:nth(0)")
+						var url = $("ul.dropdown-menu li:nth(1)")
 							.find("a")
 							.attr("href")
 							.trim();
@@ -142,7 +142,7 @@ module.exports = class One337x extends Crawler {
 
 						var description = $("div#mCSB_1_container p").text().trim();
 
-						var url = $("ul.dropdown-menu li:nth(0)")
+						var url = $("ul.dropdown-menu li:nth(1)")
 							.find("a")
 							.attr("href")
 							.trim();
