@@ -142,17 +142,17 @@ To add the dependencies on deploy, add the Puppeteer Heroku buildpack to the lis
 
 The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack`
 
+## API Documentation
+
+**NOTE:** `localhost` depends on the address your server is running on. By default, it runs on port `3000`.
+
+**Swagger:** [http://localhost:3000/docs](http://localhost:3000/docs)
+
 ## Tests
 
 ```bash
 $ npm test
 ```
-
-## API Documentation
-
-**NOTE:** `your-domain.com` depends on the address your server is running on.
-
-**Swagger:** [http://your-domain.com/docs](http://your-domain.com/docs)
 
 ## License
 
