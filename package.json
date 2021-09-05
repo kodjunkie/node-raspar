@@ -1,6 +1,6 @@
 {
 	"name": "node-raspar",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "A node.js API for scraping lossless mp3s, albums, EDM tracks, torrents and more with cache support.",
 	"main": "index.js",
 	"scripts": {
@@ -64,7 +64,7 @@
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^3.4.1",
-		"jest": "^27.0.6",
+		"jest": "^27.1.0",
 		"nodemon": "^2.0.12",
 		"prettier": "^2.3.2"
 	},
