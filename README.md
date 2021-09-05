@@ -2,13 +2,13 @@
 
 <div align="center">
 
-A node.js API for scraping lossless mp3s, albums, EDM tracks, torrents and more with cache support.
+A nodejs API for scraping lossless mp3s, albums, EDM tracks, torrents, files, and more with cache support :racehorse:
 
 [![Raspar CI](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml) <a href="https://github.com/kodjunkie/node-raspar/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" height="20"></a>
 
 </div>
 
-## Use programmatically
+## Usage
 
 Raspar exports a resolver function which accepts the configuration object as an argument and returns a promise for all available methods.
 
@@ -37,10 +37,10 @@ const options = {
 
 ```javascript
 // with default options
-const Raspar = require("node-raspar")();
+const raspar = require("node-raspar")();
 
 // or by passing custom options
-const Raspar = require("node-raspar")(options);
+const raspar = require("node-raspar")(options);
 ```
 
 <!-- ### Using ES6
@@ -49,10 +49,10 @@ const Raspar = require("node-raspar")(options);
 import raspar from "node-raspar";
 
 // with default options
-const Raspar = raspar();
+const raspar = raspar();
 
 // or by passing custom options
-const Raspar = raspar(options);
+const raspar = raspar(options);
 ``` -->
 
 ### Examples
@@ -61,16 +61,16 @@ const Raspar = raspar(options);
 // Get list results
 // Using then / catch
 const page = 1;
-Raspar.list(page).then(console.log).catch(console.error);
+raspar.list(page).then(console.log).catch(console.error);
 
 // When using zippyshare driver
 // You need to pass a genre as the second argument to the list method
 // Calling it without passing the genre returns a list of available genres
-Raspar.list(page, "Hip Hop").then(console.log).catch(console.error);
+raspar.list(page, "Hip Hop").then(console.log).catch(console.error);
 
 // Get search results
 // Using async / await in an async function
-const results = await Raspar.search("avengers", page);
+const results = await raspar.search("avengers", page);
 console.log(results);
 ```
 
@@ -127,7 +127,8 @@ $ docker run -it -p 3000:3000 raspar
 Run these additional commands
 
 ```bash
-# To boot-up first time only or whenever docker file is modified (builds the container)
+# To boot-up first time only
+# Or whenever docker file is modified (builds the container)
 $ docker compose up --build
 # To boot-up without building the container (regular use)
 $ docker compose up
