@@ -1,12 +1,12 @@
-const { version } = require("../../package.json");
+const { version, description } = require("../../package.json");
 
 module.exports = {
 	definition: {
 		openapi: "3.0.0",
 		info: {
 			title: "Raspar API",
-			version: version,
-			description: `This documentation contains all raspar endpoints.`,
+			version,
+			description,
 			license: {
 				name: "MIT License",
 				url: "https://github.com/kodjunkie/raspar/blob/master/LICENSE",
