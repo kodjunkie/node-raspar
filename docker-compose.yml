@@ -1,8 +1,8 @@
 version: "3.8"
 
 services:
-  raspar:
-    container_name: raspar-api
+  raspar-api:
+    container_name: raspar
     build: ./
     user: "node"
     command: npm run dev
