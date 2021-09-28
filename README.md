@@ -4,7 +4,7 @@
 
 A nodejs API for scraping lossless mp3s, albums, EDM tracks, torrents, files, and more with cache support :racehorse:
 
-[![Raspar CI](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml) <a href="https://github.com/kodjunkie/node-raspar/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" height="20"></a>
+[![downloads](https://img.shields.io/npm/dt/node-raspar.svg)](https://www.npmjs.com/package/node-raspar) [![raspar CI](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml) <a href="https://github.com/kodjunkie/node-raspar/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="License: MIT" height="20"></a>
 
 </div>
 
@@ -148,6 +148,16 @@ The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-
 **NOTE:** `localhost` depends on the address your server is running on. By default, it runs on port `3000`.
 
 **Swagger:** [http://localhost:3000/docs](http://localhost:3000/docs)
+
+## Liked it?
+
+Hope you liked this project, don't forget to give it a star ⭐
+
+<div align="center">
+  <a href="https://starchart.cc/kodjunkie/node-raspar">
+    <img src="https://starchart.cc/kodjunkie/node-raspar.svg" width="600px">
+  </a>
+</div>
 
 ## Tests
 
