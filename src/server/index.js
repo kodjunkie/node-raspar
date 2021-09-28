@@ -2,7 +2,6 @@ const express = require("express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const { swagger } = require("../config");
 const swaggerUi = require("swagger-ui-express-updated");
-const { notFoundHandler, errorHandler } = require("./utils");
 const routes = require("./routes");
 const { resolver } = require("./middleware");
 
@@ -23,10 +22,24 @@ module.exports = (port) => {
 
 	app.use(resolver, routes);
 
-	app.use(notFoundHandler);
+	// Route not found
+	app.use((req, res) => {
+		res.status(404).json({
+			error: {
+				message: "Resource not found.",
+				code: 404,
+			},
+		});
+	});
 
 	// Global error handlers
-	app.use(errorHandler);
+	app.use((error, req, res, next) => {
+		if (error) {
+			const message = error.message || "Oops, an error has occurred.";
+			res.status(500).json({ error: { message: message } });
+		}
+		next();
+	});
 
 	app.listen(port);
 };

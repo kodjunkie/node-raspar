@@ -22,7 +22,7 @@ module.exports = class Raspar {
 	static commander(argv = []) {
 		const { Command } = require("commander");
 		const { version, name } = require("../config");
-		const serve = require("../api");
+		const server = require("../server");
 		const program = new Command();
 
 		program
@@ -37,7 +37,7 @@ module.exports = class Raspar {
 			.action(({ parent }) => {
 				const PORT = process.env.PORT || parent.port;
 				console.log("Raspar is running on port", PORT);
-				serve(PORT);
+				server(PORT);
 			});
 
 		program.parse(argv);

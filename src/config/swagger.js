@@ -19,5 +19,5 @@ module.exports = {
 		},
 		servers: [{ url: "http://localhost:3000" }],
 	},
-	apis: [__dirname + "/../api/routes.js"],
+	apis: [__dirname + "/../server/routes.js"],
 };
