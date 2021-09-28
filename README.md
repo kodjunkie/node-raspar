@@ -33,7 +33,7 @@ const options = {
 
 **NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
-### Using CommonJs
+### Usage
 
 ```javascript
 // with default options
