@@ -61,6 +61,7 @@ console.log(results);
 - Zippyshare (default)
 - 1337x
 - Netnaija
+- Zoro
 
 ## Available Methods
 
@@ -69,6 +70,7 @@ console.log(results);
 | `Zippyshare` | :heavy_check_mark:  | :heavy_check_mark: |
 | `1337x`      | :heavy_check_mark:  | :heavy_check_mark: |
 | `Netnaija`   | :heavy_check_mark:  | :heavy_check_mark: |
+| `Zoro`       | :heavy_check_mark:  | :heavy_check_mark: |
 
 ## Running / Deploying the API
 
