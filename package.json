@@ -1,7 +1,7 @@
 {
 	"name": "node-raspar",
 	"version": "1.2.5",
-	"description": "A node.js API for scraping lossless mp3s, albums, EDM tracks, torrents and more with cache support.",
+	"description": "Easily scrap the web for torrent and media files.",
 	"main": "index.js",
 	"scripts": {
 		"start": "node . api",
