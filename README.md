@@ -16,7 +16,7 @@ In your terminal, simply run
 npm i node-raspar
 ```
 
-### Usage in an existing project
+### Use in an existing project
 
 Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
 
@@ -32,7 +32,7 @@ const options = {
 
 **NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
-### Examples
+### Usage
 
 ```javascript
 // Initialize
@@ -56,21 +56,14 @@ const results = await raspar.search("avengers", page);
 console.log(results);
 ```
 
-## Available Drivers
+## Available Drivers and Methods
 
-- Zippyshare (default)
-- 1337x
-- Netnaija
-- Zoro
-
-## Available Methods
-
-| Drivers      | search(query, page) | list(page)         |
-| ------------ | ------------------- | ------------------ |
-| `Zippyshare` | :heavy_check_mark:  | :heavy_check_mark: |
-| `1337x`      | :heavy_check_mark:  | :heavy_check_mark: |
-| `Netnaija`   | :heavy_check_mark:  | :heavy_check_mark: |
-| `Zoro`       | :heavy_check_mark:  | :heavy_check_mark: |
+| Drivers    | Type      | search(query, page) | list(page)         |
+| ---------- | --------- | ------------------- | ------------------ |
+| Zippyshare | `Music`   | :heavy_check_mark:  | :heavy_check_mark: |
+| 1337x      | `Torrent` | :heavy_check_mark:  | :heavy_check_mark: |
+| Netnaija   | `Movie`   | :heavy_check_mark:  | :heavy_check_mark: |
+| Zoro       | `Anime`   | :heavy_check_mark:  | :heavy_check_mark: |
 
 ## Running / Deploying the API
 
@@ -131,7 +124,7 @@ The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-
 
 ## API Documentation
 
-**NOTE:** `localhost` depends on the address your server is running on. By default, it runs on port `3000`
+**NOTE:** `localhost` refers to the address your server is running on. By default, it runs on port `3000`
 
 **Swagger:** [http://localhost:3000/docs](http://localhost:3000/docs)
 
