@@ -1,8 +1,8 @@
-const One337x = require("../../src/drivers/1337x");
+const NetNaija = require("../../src/drivers/netnaija");
 const Crawler = require("../../src/lib/crawler");
 jest.mock("../../src/lib/crawler");
 
-describe("1337x", () => {
+describe("NetNaija", () => {
 	beforeEach(() => {
 		Crawler.mockClear();
 	});
@@ -10,7 +10,7 @@ describe("1337x", () => {
 	it("is instantiate-able", () => {
 		expect.assertions(2);
 
-		new One337x();
+		new NetNaija();
 		expect(Crawler.mock.calls.length).toBe(1);
 		expect(Crawler).toHaveBeenCalledTimes(1);
 	});

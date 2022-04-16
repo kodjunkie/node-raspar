@@ -2,7 +2,7 @@ const ZippyShare = require("../../src/drivers/zippyshare");
 const Crawler = require("../../src/lib/crawler");
 jest.mock("../../src/lib/crawler");
 
-describe("Zippyshare driver tests", () => {
+describe("ZippyShare", () => {
 	beforeEach(() => {
 		Crawler.mockClear();
 	});
