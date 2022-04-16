@@ -26,7 +26,7 @@ Raspar exports a resolver function which accepts the configuration object as an 
 const options = {
 	driver: "1337x", // default: zippyshare
 	perPage: 12, // Results per page (default: 10)
-	cache: { options: { ttl: 60 * 8 } }, // cache configuration, to disable caching set to "false"
+	cache: { options: { ttl: 60 * 8 } }, // to disable caching set to "false"
 };
 ```
 
@@ -129,7 +129,7 @@ The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-
 
 ## API Documentation
 
-**NOTE:** `localhost` depends on the address your server is running on. By default, it runs on port `3000`.
+**NOTE:** `localhost` depends on the address your server is running on. By default, it runs on port `3000`
 
 **Swagger:** [http://localhost:3000/docs](http://localhost:3000/docs)
 
