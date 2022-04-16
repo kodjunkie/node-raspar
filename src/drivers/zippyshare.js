@@ -14,27 +14,27 @@ module.exports = class ZippyShare extends Crawler {
 	async performSearch(query, page = 1) {
 		const data = [];
 
-		let { links } = await this.scrape(
+		let { pages } = await this.scrape(
 			`${this.endpoint}/zippyshare/search?q=${query}#gsc.tab=0&gsc.q=${query}&gsc.page=${page}`,
 			function () {
-				var links = [];
+				var pages = [];
 
 				// Get response data
 				$("div.gs-webResult").each(function () {
 					var name = $(this).children(":nth-child(1)").find("a").text().trim(),
 						url = $(this).children(":nth-child(1)").find("a").attr("href");
-					if (name && url) links.push(url);
+					if (name && url) pages.push(url);
 				});
 
-				return { links: links };
+				return { pages: pages };
 			}
 		);
 
-		if (!links) return { data };
-		if (links.length > this.perPage) links = links.slice(0, this.perPage);
+		if (!pages) return { data };
+		if (pages.length > this.perPage) pages = pages.slice(0, this.perPage);
 
-		const promises = links.map(async (link) => {
-			const result = await this.scrape(link, function () {
+		const promises = pages.map(async (p) => {
+			const result = await this.scrape(p, function () {
 				var name = $("tbody div#lrbox .left")
 					.children(":nth-child(4)")
 					.text()
@@ -89,8 +89,8 @@ module.exports = class ZippyShare extends Crawler {
 
 			// Get from cache first
 			const cacheKey = query + page + this.endpoint;
-			const cachedResponse = await this.cache.get(cacheKey);
-			if (cachedResponse) return cachedResponse;
+			const cachedData = await this.cache.get(cacheKey);
+			if (cachedData) return cachedData;
 
 			// Get and cache the response
 			const data = await this.performSearch(query, page);
@@ -114,8 +114,8 @@ module.exports = class ZippyShare extends Crawler {
 
 			// Get from cache first
 			const cacheKey = genre + page + this.endpoint;
-			const cachedResponse = await this.cache.get(cacheKey);
-			if (cachedResponse) return cachedResponse;
+			const cachedData = await this.cache.get(cacheKey);
+			if (cachedData) return cachedData;
 
 			let data;
 			if (genre) data = await this.performSearch(genre, page);
@@ -137,10 +137,10 @@ module.exports = class ZippyShare extends Crawler {
 								});
 						});
 
-					return { data: results };
+					return results;
 				});
 
-				data = { data: response.data };
+				data = { data: response };
 			}
 
 			await this.browser.close();
