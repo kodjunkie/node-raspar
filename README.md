@@ -8,17 +8,17 @@ Easily scrap the web for torrent and media files.
 
 </div>
 
-## Installation
+## Use in an existing project
+
+Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
+
+### Installation
 
 In your terminal, simply run
 
 ```bash
 npm i node-raspar
 ```
-
-### Use in an existing project
-
-Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
 
 #### Configuration (options)
 
@@ -60,10 +60,10 @@ console.log(results);
 
 | Drivers    | Type      | search(query, page) | list(page)         |
 | ---------- | --------- | ------------------- | ------------------ |
-| Zippyshare | `Music`   | :heavy_check_mark:  | :heavy_check_mark: |
-| 1337x      | `Torrent` | :heavy_check_mark:  | :heavy_check_mark: |
-| Netnaija   | `Movie`   | :heavy_check_mark:  | :heavy_check_mark: |
-| Zoro       | `Anime`   | :heavy_check_mark:  | :heavy_check_mark: |
+| Zippyshare | `Music`   | :white_check_mark:  | :white_check_mark: |
+| 1337x      | `Torrent` | :white_check_mark:  | :white_check_mark: |
+| Netnaija   | `Movie`   | :white_check_mark:  | :white_check_mark: |
+| Zoro       | `Anime`   | :white_check_mark:  | :white_check_mark: |
 
 ## Running / Deploying the API
 
