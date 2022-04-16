@@ -81,6 +81,7 @@ module.exports = class Crawler {
 				await page.goto(url, { waitUntil: "load", timeout: 0 });
 				await page.addScriptTag({ path: require.resolve("jquery") });
 				const response = await page.evaluate(transform);
+				await page.close();
 				return resolve(response);
 			} catch (error) {
 				return reject(error);
