@@ -7,7 +7,7 @@ module.exports = class NetNaija extends Crawler {
 	}
 
 	/**
-	 * Music search
+	 * Search
 	 * @param  string query
 	 * @param  Number page=1
 	 */

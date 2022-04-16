@@ -69,12 +69,7 @@ module.exports = class One337x extends Crawler {
 						.attr("href")
 						.trim();
 
-					return {
-						name: name,
-						description: description,
-						url: url,
-						magnetic_link: magnetic_link,
-					};
+					return { name, description, url, magnetic_link };
 				});
 
 				if (result && result.name && result.url) {
@@ -149,12 +144,7 @@ module.exports = class One337x extends Crawler {
 						.attr("href")
 						.trim();
 
-					return {
-						name: name,
-						description: description,
-						url: url,
-						magnetic_link: magnetic_link,
-					};
+					return { name, description, url, magnetic_link };
 				});
 
 				if (result && result.name && result.url) {
