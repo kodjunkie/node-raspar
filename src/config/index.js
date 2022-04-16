@@ -7,7 +7,7 @@ module.exports = {
 
 	defaultDriver: "zippyshare",
 
-	drivers: ["zippyshare", "1337x"],
+	drivers: ["zippyshare", "1337x", "netnaija"],
 
 	cache: require("./cache"),
 

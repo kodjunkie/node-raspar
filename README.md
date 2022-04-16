@@ -1,18 +1,14 @@
-<h1 align="center">Node Raspar</h1>
-
 <div align="center">
 
-A nodejs API for scraping lossless mp3s, albums, EDM tracks, torrents, files, and more with cache support :racehorse:
+<h1>Node Raspar</h1>
+
+A nodejs API for scraping lossless mp3s, albums, EDM tracks, torrents, files, and more with cache support 🐎
 
 [![downloads](https://img.shields.io/npm/dt/node-raspar.svg)](https://www.npmjs.com/package/node-raspar) [![raspar CI](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml) <a href="https://github.com/kodjunkie/node-raspar/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="License: MIT" height="20"></a>
 
 </div>
 
-## Usage
-
-Raspar exports a resolver function which accepts the configuration object as an argument and returns a promise for all available methods.
-
-### Installation
+## Installation
 
 In your terminal, simply run
 
@@ -20,44 +16,30 @@ In your terminal, simply run
 npm i node-raspar
 ```
 
-### Configuration (options)
+### Usage in an existing project
+
+Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
+
+#### Configuration (options)
 
 ```javascript
 const options = {
 	driver: "1337x", // default: zippyshare
 	perPage: 12, // Results per page (default: 10)
-	cache: { options: { ttl: 60 * 8 } } || true || false,
-	// cache configuration, to disable caching set to "false"
+	cache: { options: { ttl: 60 * 8 } }, // to disable caching set to "false"
 };
 ```
 
 **NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
-### Usage
-
-```javascript
-// with default options
-const raspar = require("node-raspar")();
-
-// or by passing custom options
-const raspar = require("node-raspar")(options);
-```
-
-<!-- ### Using ES6
-
-```javascript
-import raspar from "node-raspar";
-
-// with default options
-const raspar = raspar();
-
-// or by passing custom options
-const raspar = raspar(options);
-``` -->
-
 ### Examples
 
 ```javascript
+// Initialize
+// by passing a custom options
+// or leave empty for default options
+const raspar = require("node-raspar")(options);
+
 // Get list results
 // Using then / catch
 const page = 1;
@@ -76,15 +58,17 @@ console.log(results);
 
 ## Available Drivers
 
-- zippyshare (default)
+- Zippyshare (default)
 - 1337x
+- Netnaija
 
 ## Available Methods
 
 | Drivers      | search(query, page) | list(page)         |
 | ------------ | ------------------- | ------------------ |
-| `zippyshare` | :heavy_check_mark:  | :heavy_check_mark: |
+| `Zippyshare` | :heavy_check_mark:  | :heavy_check_mark: |
 | `1337x`      | :heavy_check_mark:  | :heavy_check_mark: |
+| `Netnaija`   | :heavy_check_mark:  | :heavy_check_mark: |
 
 ## Running / Deploying the API
 
@@ -145,7 +129,7 @@ The url for the buildpack is `https://github.com/CoffeeAndCode/puppeteer-heroku-
 
 ## API Documentation
 
-**NOTE:** `localhost` depends on the address your server is running on. By default, it runs on port `3000`.
+**NOTE:** `localhost` depends on the address your server is running on. By default, it runs on port `3000`
 
 **Swagger:** [http://localhost:3000/docs](http://localhost:3000/docs)
 
@@ -163,8 +147,11 @@ Hope you liked this project, don't forget to give it a star ⭐
 
 ```bash
 $ npm test
+
+# Or via Docker
+$ docker exec -it raspar npm test
 ```
 
 ## License
 
-This project is opened under the [MIT 2.0 License](https://github.com/kodjunkie/raspar/blob/master/LICENSE) which allows very broad use for both academic and commercial purposes.
+This project is opened under the [MIT 2.0 License](https://github.com/kodjunkie/node-raspar/blob/master/LICENSE) which allows very broad use for both academic and commercial purposes.

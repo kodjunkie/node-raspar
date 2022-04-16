@@ -1,7 +1,7 @@
 const express = require("express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const { swagger } = require("../config");
-const swaggerUi = require("swagger-ui-express-updated");
+const swaggerUi = require("swagger-ui-express");
 const routes = require("./routes");
 const { resolver } = require("./middleware");
 

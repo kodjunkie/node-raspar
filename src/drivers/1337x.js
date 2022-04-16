@@ -17,14 +17,14 @@ module.exports = class One337x extends Crawler {
 
 			// Get from cache first
 			const cacheKey = query + page + this.endpoint;
-			const cachedResponse = await this.cache.get(cacheKey);
-			if (cachedResponse) return cachedResponse;
+			const cachedData = await this.cache.get(cacheKey);
+			if (cachedData) return cachedData;
 
 			const data = [];
-			let { links } = await this.scrape(
+			let { pages } = await this.scrape(
 				`${this.endpoint}/search/${query}/${page}/`,
 				function () {
-					var links = [];
+					var pages = [];
 
 					// Get response data
 					$("table.table-list tbody tr").each(function () {
@@ -40,49 +40,46 @@ module.exports = class One337x extends Crawler {
 								.contents()
 								.get(0)
 								.nodeValue.trim();
-						if (path && size) links.push({ size, path, seeds, leeches });
+						if (path && size) pages.push({ size, path, seeds, leeches });
 					});
 
-					return { links: links };
+					return { pages: pages };
 				}
 			);
 
-			if (!links) return { data };
-			if (links.length > this.perPage) links = links.slice(0, this.perPage);
+			if (!pages) return { data };
+			if (pages.length > this.perPage) pages = pages.slice(0, this.perPage);
 
-			const promises = links.map(async (link) => {
-				const result = await this.scrape(
-					this.endpoint + link.path,
-					function () {
-						var name = $("div.box-info-heading h1").text().trim();
+			const promises = pages.map(async (p) => {
+				const result = await this.scrape(this.endpoint + p.path, function () {
+					var name = $("div.box-info-heading h1").text().trim();
 
-						var description = $("div#mCSB_1_container p").text().trim();
+					var description = $("div#mCSB_1_container p").text().trim();
 
-						var url = $("ul.dropdown-menu li:nth(1)")
-							.find("a")
-							.attr("href")
-							.trim();
+					var url = $("ul.dropdown-menu li:nth(1)")
+						.find("a")
+						.attr("href")
+						.trim();
 
-						var magnetic_link = $(
-							"div.torrent-detail-page div:nth-child(1) ul:nth(0)"
-						)
-							.children("li:nth(0)")
-							.find("a:nth(0)")
-							.attr("href")
-							.trim();
+					var magnetic_link = $(
+						"div.torrent-detail-page div:nth-child(1) ul:nth(0)"
+					)
+						.children("li:nth(0)")
+						.find("a:nth(0)")
+						.attr("href")
+						.trim();
 
-						return {
-							name: name,
-							description: description,
-							url: url,
-							magnetic_link: magnetic_link,
-						};
-					}
-				);
+					return {
+						name: name,
+						description: description,
+						url: url,
+						magnetic_link: magnetic_link,
+					};
+				});
 
 				if (result && result.name && result.url) {
-					delete link.path;
-					data.push({ ...result, ...link });
+					delete p.path;
+					data.push({ ...result, ...p });
 				}
 			});
 
@@ -98,18 +95,17 @@ module.exports = class One337x extends Crawler {
 
 	/**
 	 * Get list
-	 * @param  Number page=1
 	 */
-	async list(page = 1) {
+	async list() {
 		try {
 			// Get from cache first
 			const cacheKey = this.endpoint;
-			const cachedResponse = await this.cache.get(cacheKey);
-			if (cachedResponse) return cachedResponse;
+			const cachedData = await this.cache.get(cacheKey);
+			if (cachedData) return cachedData;
 
 			const data = [];
-			let { links } = await this.scrape(`${this.endpoint}/home/`, function () {
-				var links = [];
+			let { pages } = await this.scrape(`${this.endpoint}/home/`, function () {
+				var pages = [];
 
 				// Get response data
 				$("table.table-list:nth(0) tbody tr").each(function () {
@@ -125,48 +121,45 @@ module.exports = class One337x extends Crawler {
 							.contents()
 							.get(0)
 							.nodeValue.trim();
-					if (path && size) links.push({ size, path, seeds, leeches });
+					if (path && size) pages.push({ size, path, seeds, leeches });
 				});
 
-				return { links: links };
+				return { pages: pages };
 			});
 
-			if (!links) return { data };
-			if (links.length > this.perPage) links = links.slice(0, this.perPage);
+			if (!pages) return { data };
+			if (pages.length > this.perPage) pages = pages.slice(0, this.perPage);
 
-			const promises = links.map(async (link) => {
-				const result = await this.scrape(
-					this.endpoint + link.path,
-					function () {
-						var name = $("div.box-info-heading h1").text().trim();
+			const promises = pages.map(async (p) => {
+				const result = await this.scrape(this.endpoint + p.path, function () {
+					var name = $("div.box-info-heading h1").text().trim();
 
-						var description = $("div#mCSB_1_container p").text().trim();
+					var description = $("div#mCSB_1_container p").text().trim();
 
-						var url = $("ul.dropdown-menu li:nth(1)")
-							.find("a")
-							.attr("href")
-							.trim();
+					var url = $("ul.dropdown-menu li:nth(1)")
+						.find("a")
+						.attr("href")
+						.trim();
 
-						var magnetic_link = $(
-							"div.torrent-detail-page div:nth-child(1) ul:nth(0)"
-						)
-							.children("li:nth(0)")
-							.find("a:nth(0)")
-							.attr("href")
-							.trim();
+					var magnetic_link = $(
+						"div.torrent-detail-page div:nth-child(1) ul:nth(0)"
+					)
+						.children("li:nth(0)")
+						.find("a:nth(0)")
+						.attr("href")
+						.trim();
 
-						return {
-							name: name,
-							description: description,
-							url: url,
-							magnetic_link: magnetic_link,
-						};
-					}
-				);
+					return {
+						name: name,
+						description: description,
+						url: url,
+						magnetic_link: magnetic_link,
+					};
+				});
 
 				if (result && result.name && result.url) {
-					delete link.path;
-					data.push({ ...result, ...link });
+					delete p.path;
+					data.push({ ...result, ...p });
 				}
 			});
 
