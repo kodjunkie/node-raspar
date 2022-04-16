@@ -18,7 +18,7 @@ npm i node-raspar
 
 ### Usage in an existing project
 
-Raspar exports a resolver function which accepts the configuration object as an argument and returns a promise for all available methods.
+Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
 
 #### Configuration (options)
 
