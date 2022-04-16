@@ -58,12 +58,12 @@ console.log(results);
 
 ## Available Drivers and Methods
 
-| Drivers    | Type      | search(query, page) | list(page)         |
-| ---------- | --------- | ------------------- | ------------------ |
-| Zippyshare | `Music`   | :white_check_mark:  | :white_check_mark: |
-| 1337x      | `Torrent` | :white_check_mark:  | :white_check_mark: |
-| Netnaija   | `Movie`   | :white_check_mark:  | :white_check_mark: |
-| Zoro       | `Anime`   | :white_check_mark:  | :white_check_mark: |
+| Drivers    | Type      | Search (query, page) | List (page)        |
+| ---------- | --------- | -------------------- | ------------------ |
+| Zippyshare | `Music`   | :white_check_mark:   | :white_check_mark: |
+| 1337x      | `Torrent` | :white_check_mark:   | :white_check_mark: |
+| Netnaija   | `Movie`   | :white_check_mark:   | :white_check_mark: |
+| Zoro       | `Anime`   | :white_check_mark:   | :white_check_mark: |
 
 ## Running / Deploying the API
 
