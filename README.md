@@ -2,7 +2,7 @@
 
 <h1>Node Raspar</h1>
 
-Easily scrap the Web for torrent and media files 🕷️
+Easily scrap the web for torrent and media files 🕷️
 
 [![downloads](https://img.shields.io/npm/dt/node-raspar.svg)](https://www.npmjs.com/package/node-raspar) [![raspar CI](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/kodjunkie/node-raspar/actions/workflows/node.js.yml) <a href="https://github.com/kodjunkie/node-raspar/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="License: MIT" height="20"></a>
 
