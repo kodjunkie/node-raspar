@@ -19,11 +19,10 @@ module.exports = class ZippyShare extends Crawler {
 			function () {
 				var pages = [];
 
-				// Get response data
+				// Get pages
 				$("div.gs-webResult").each(function () {
-					var name = $(this).children(":nth-child(1)").find("a").text().trim(),
-						url = $(this).children(":nth-child(1)").find("a").attr("href");
-					if (name && url) pages.push(url);
+					var url = $(this).children(":nth-child(1)").find("a").attr("href");
+					if (url) pages.push(url);
 				});
 
 				return { pages: pages };
@@ -64,12 +63,10 @@ module.exports = class ZippyShare extends Crawler {
 					url: "https:" + domain[0] + path,
 					size: size.replace("3)", ""),
 					key: domain[1].split("/")[0],
-					path: path,
 				};
 			});
 
-			if (result && result.name && result.path) {
-				delete result.path;
+			if (result && result.name) {
 				data.push(result);
 			}
 		});
