@@ -1,15 +1,17 @@
 const Cache = require("./cache");
 const { readFileSync } = require("fs");
 const puppeteer = require("puppeteer-extra");
+const referrers = require("../config/referrers.json");
 const { cache: cacheConfig, perPage } = require("../config");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const AnonymizeUA = require("puppeteer-extra-plugin-anonymize-ua");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
 const preloadFile = readFileSync(__dirname + "/../config/preload.js", "utf8");
 
-puppeteer.use(AnonymizeUA({ stripHeadless: true, makeWindows: true }));
-puppeteer.use(StealthPlugin());
+// Plugins
 puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+puppeteer.use(AnonymizeUA({ stripHeadless: true }));
+puppeteer.use(StealthPlugin());
 
 module.exports = class Crawler {
 	constructor(options) {
@@ -70,22 +72,24 @@ module.exports = class Crawler {
 	 * @param url
 	 * @param transform
 	 */
-	scrape(url, transform) {
-		return new Promise(async (resolve, reject) => {
-			try {
-				await this.launchBrowser();
-				const page = await this.browser.newPage();
-				await page.setCacheEnabled(false);
-				await page._client.send("Network.clearBrowserCookies");
-				await page.evaluateOnNewDocument(preloadFile);
-				await page.goto(url, { waitUntil: "load", timeout: 0 });
-				await page.addScriptTag({ path: require.resolve("jquery") });
-				const response = await page.evaluate(transform);
-				await page.close();
-				return resolve(response);
-			} catch (error) {
-				return reject(error);
-			}
-		});
+	async scrape(url, transform) {
+		try {
+			// Set a random referer
+			const referer = referrers[Math.floor(Math.random() * referrers.length)];
+			// Launch the browser
+			await this.launchBrowser();
+			const page = await this.browser.newPage();
+			await page.setCacheEnabled(false);
+			await page.setExtraHTTPHeaders({ referer });
+			await page._client.send("Network.clearBrowserCookies");
+			await page.evaluateOnNewDocument(preloadFile);
+			await page.goto(url, { waitUntil: "load", timeout: 0 });
+			await page.addScriptTag({ path: require.resolve("jquery") });
+			const response = await page.evaluate(transform);
+			await page.close();
+			return response;
+		} catch (error) {
+			throw error;
+		}
 	}
 };
