@@ -31,28 +31,28 @@ Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#re
 ```javascript
 const options = {
 	driver: "1337x", // default: zippyshare
-	perPage: 12, // Results per page (default: 10)
+	perPage: 12, // results per page (default: 10)
 	cache: { options: { ttl: 60 * 8 } }, // to disable caching set to "false"
 };
 ```
 
-**Example** - get a list of music files (using the `zippyshare` driver)
+**Example 1** - get a list of music files (using the `zippyshare` driver)
 
 ```javascript
-// Initialize by passing a custom options
+// initialize by passing a custom options
 // or leave empty for default
 const raspar = require("node-raspar")(options);
 
-// When using zippyshare driver
-// You need to pass a genre as the second argument to the list method
-// Calling it without passing the genre returns a list of available genres
+// when using zippyshare driver
+// you need to pass a genre as the second argument to the list method
+// calling it without passing the genre returns a list of available genres
 const page = 1;
 const genre = "Hip Hop";
 
 raspar.list(page, genre).then(console.log).catch(console.error);
 ```
 
-**Example** - search for torrent files (using the `1337x` driver)
+**Example 2** - search for torrent files (using the `1337x` driver)
 
 ```javascript
 const raspar = require("node-raspar")(options);
@@ -96,7 +96,7 @@ Run these additional commands
 ```bash
 # install dependencies
 $ npm install
-# start thr server
+# start the server
 $ npm start
 ```
 
@@ -116,12 +116,12 @@ $ docker run -it -p 3000:3000 raspar
 Run these additional commands
 
 ```bash
-# To boot-up first time only
-# Or whenever docker file is modified (builds the container)
+# to boot-up first time only
+# or whenever docker file is modified (builds the container)
 $ docker compose up --build
-# To boot-up without building the container (regular use)
+# to boot-up without building the container (regular use)
 $ docker compose up
-# To shut-down
+# to shut-down
 $ docker compose down
 ```
 
@@ -153,7 +153,7 @@ Hope you liked this project, don't forget to give it a star ⭐
 ```bash
 $ npm test
 
-# Or via Docker
+# or via Docker
 $ docker exec -it raspar npm test
 ```
 
