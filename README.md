@@ -10,7 +10,7 @@ Easily scrap the web for torrent and media files.
 
 ## Getting Started
 
-Raspar exports a resolver function which accepts the configuration object as an argument and returns promises (async/await) for all available methods.
+Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
 
 ### Installation
 
@@ -153,7 +153,7 @@ Hope you liked this project, don't forget to give it a star ⭐
 ```bash
 $ npm test
 
-# or via Docker
+# or via docker
 $ docker exec -it raspar npm test
 ```
 
