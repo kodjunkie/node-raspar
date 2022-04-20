@@ -10,21 +10,21 @@ Easily scrap the web for torrent and media files.
 
 ## Getting Started
 
-Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
+> Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
 
 ### Installation
 
 To use Raspar in your project, run:
 
 ```bash
-npm i node-raspar
+$ npm i node-raspar
 ```
 
 ### Usage
 
-Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#release-schedule) version of Node.
+Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#release-schedule) version of Node and v14.x or greater is recommended.
 
-#### Configuration (options)
+#### Configuration
 
 **NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
@@ -77,7 +77,7 @@ const raspar = require("node-raspar")(options);
 
 ## Running / Deploying the API
 
-This is the first step if you're trying to either run it with or without using `Docker`
+This is the first step if you're trying to either run it with or without using `docker`
 In terminal run the following commands to get the code on your machine.
 
 ```bash
@@ -106,9 +106,9 @@ Run these additional commands
 
 ```bash
 # build the container
-$ docker build -t raspar .
+$ docker build -t raspar-api .
 # run the container mapping the ports
-$ docker run -it -p 3000:3000 raspar
+$ docker run --name raspar -it -p 3000:3000 raspar-api
 ```
 
 ### With Docker Compose
