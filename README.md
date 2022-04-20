@@ -8,52 +8,62 @@ Easily scrap the web for torrent and media files.
 
 </div>
 
-## Use in an existing project
+## Getting Started
 
 Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
 
 ### Installation
 
-In your terminal, simply run
+To use Raspar in your project, run:
 
 ```bash
 npm i node-raspar
 ```
 
+### Usage
+
+Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#release-schedule) version of Node.
+
 #### Configuration (options)
+
+**NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
 ```javascript
 const options = {
 	driver: "1337x", // default: zippyshare
-	perPage: 12, // Results per page (default: 10)
+	perPage: 12, // results per page (default: 10)
 	cache: { options: { ttl: 60 * 8 } }, // to disable caching set to "false"
 };
 ```
 
-**NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
-
-### Usage
+**Example 1** - get a list of music files (using the `zippyshare` driver)
 
 ```javascript
-// Initialize
-// by passing a custom options
-// or leave empty for default options
+// initialize by passing a custom options
+// or leave empty for default
 const raspar = require("node-raspar")(options);
 
-// Get list results
-// Using then / catch
+// when using zippyshare driver
+// you need to pass a genre as the second argument to the list method
+// calling it without passing the genre returns a list of available genres
 const page = 1;
-raspar.list(page).then(console.log).catch(console.error);
+const genre = "Hip Hop";
 
-// When using zippyshare driver
-// You need to pass a genre as the second argument to the list method
-// Calling it without passing the genre returns a list of available genres
-raspar.list(page, "Hip Hop").then(console.log).catch(console.error);
+raspar.list(page, genre).then(console.log).catch(console.error);
+```
 
-// Get search results
-// Using async / await in an async function
-const results = await raspar.search("avengers", page);
-console.log(results);
+**Example 2** - search for torrent files (using the `1337x` driver)
+
+```javascript
+const raspar = require("node-raspar")(options);
+
+(async () => {
+	const page = 1;
+	const keyword = "avengers";
+
+	const results = await raspar.search(keyword, page);
+	console.log(results);
+})();
 ```
 
 ## Available Drivers and Methods
@@ -86,7 +96,7 @@ Run these additional commands
 ```bash
 # install dependencies
 $ npm install
-# start thr server
+# start the server
 $ npm start
 ```
 
@@ -106,12 +116,12 @@ $ docker run -it -p 3000:3000 raspar
 Run these additional commands
 
 ```bash
-# To boot-up first time only
-# Or whenever docker file is modified (builds the container)
+# to boot-up first time only
+# or whenever docker file is modified (builds the container)
 $ docker compose up --build
-# To boot-up without building the container (regular use)
+# to boot-up without building the container (regular use)
 $ docker compose up
-# To shut-down
+# to shut-down
 $ docker compose down
 ```
 
@@ -143,7 +153,7 @@ Hope you liked this project, don't forget to give it a star ⭐
 ```bash
 $ npm test
 
-# Or via Docker
+# or via docker
 $ docker exec -it raspar npm test
 ```
 
