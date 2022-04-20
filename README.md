@@ -17,7 +17,7 @@ Easily scrap the web for torrent and media files.
 To use Raspar in your project, run:
 
 ```bash
-$ npm i node-raspar
+npm i node-raspar
 ```
 
 ### Usage
