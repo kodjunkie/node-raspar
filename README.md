@@ -10,7 +10,7 @@ Easily scrap the web for torrent and media files.
 
 ## Getting Started
 
-Raspar exports a resolver function which accepts the configuration object as an argument and returns promises (`async/await`) for all available methods.
+Raspar exports a resolver function which accepts the configuration object as an argument and returns promises (async/await) for all available methods.
 
 ### Installation
 
@@ -20,7 +20,13 @@ To use Raspar in your project, run:
 npm i node-raspar
 ```
 
+### Usage
+
+Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#release-schedule) version of Node.
+
 #### Configuration (options)
+
+**NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
 ```javascript
 const options = {
@@ -30,13 +36,7 @@ const options = {
 };
 ```
 
-**NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
-
-### Usage
-
-Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#release-schedule) version of Node.
-
-**Example** - get a list of songs from Zippyshare (using the `zippyshare` driver)
+**Example** - get a list of music files (using the `zippyshare` driver)
 
 ```javascript
 // Initialize by passing a custom options
@@ -44,8 +44,8 @@ Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#re
 const raspar = require("node-raspar")(options);
 
 // When using zippyshare driver
-// You need to pass a `genre` as the second argument to the list method
-// Calling it without passing the `genre` returns a list of available genres
+// You need to pass a genre as the second argument to the list method
+// Calling it without passing the genre returns a list of available genres
 const page = 1;
 const genre = "Hip Hop";
 
@@ -61,7 +61,7 @@ const raspar = require("node-raspar")(options);
 	const page = 1;
 	const keyword = "avengers";
 
-	const results = await raspar.list(keyword, page);
+	const results = await raspar.search(keyword, page);
 	console.log(results);
 })();
 ```
