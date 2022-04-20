@@ -8,13 +8,13 @@ Easily scrap the web for torrent and media files.
 
 </div>
 
-## Use in an existing project
+## Getting Started
 
-Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
+Raspar exports a resolver function which accepts the configuration object as an argument and returns promises (`async/await`) for all available methods.
 
 ### Installation
 
-In your terminal, simply run
+To use Raspar in your project, run:
 
 ```bash
 npm i node-raspar
@@ -34,26 +34,36 @@ const options = {
 
 ### Usage
 
+Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#release-schedule) version of Node.
+
+**Example** - get a list of songs from Zippyshare (using the `zippyshare` driver)
+
 ```javascript
-// Initialize
-// by passing a custom options
-// or leave empty for default options
+// Initialize by passing a custom options
+// or leave empty for default
 const raspar = require("node-raspar")(options);
 
-// Get list results
-// Using then / catch
-const page = 1;
-raspar.list(page).then(console.log).catch(console.error);
-
 // When using zippyshare driver
-// You need to pass a genre as the second argument to the list method
-// Calling it without passing the genre returns a list of available genres
-raspar.list(page, "Hip Hop").then(console.log).catch(console.error);
+// You need to pass a `genre` as the second argument to the list method
+// Calling it without passing the `genre` returns a list of available genres
+const page = 1;
+const genre = "Hip Hop";
 
-// Get search results
-// Using async / await in an async function
-const results = await raspar.search("avengers", page);
-console.log(results);
+raspar.list(page, genre).then(console.log).catch(console.error);
+```
+
+**Example** - search for torrent files (using the `1337x` driver)
+
+```javascript
+const raspar = require("node-raspar")(options);
+
+(async () => {
+	const page = 1;
+	const keyword = "avengers";
+
+	const results = await raspar.list(keyword, page);
+	console.log(results);
+})();
 ```
 
 ## Available Drivers and Methods
