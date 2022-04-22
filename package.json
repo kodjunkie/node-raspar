@@ -1,6 +1,6 @@
 {
 	"name": "node-raspar",
-	"version": "1.2.5",
+	"version": "1.2.6",
 	"description": "Easily scrap the web for torrent and media files.",
 	"main": "index.js",
 	"scripts": {
@@ -18,7 +18,7 @@
 	},
 	"keywords": [
 		"music",
-		"API",
+		"api",
 		"download",
 		"search",
 		"torrent",
@@ -29,13 +29,12 @@
 		"crawling",
 		"spider",
 		"free",
-		"music-api",
-		"RESTful-api",
 		"nodejs",
 		"lossless",
 		"EDM",
-		"instruments",
-		"beats"
+		"instrumentals",
+		"beats",
+		"node"
 	],
 	"author": "Lawrence Onah <paplow01@gmail.com>",
 	"license": "MIT",
@@ -50,7 +49,7 @@
 		"express": "^4.17.3",
 		"express-validator": "^6.14.0",
 		"jquery": "^3.6.0",
-		"puppeteer": "^13.5.2",
+		"puppeteer": "^13.6.0",
 		"puppeteer-extra": "^3.2.3",
 		"puppeteer-extra-plugin-adblocker": "^2.12.0",
 		"puppeteer-extra-plugin-anonymize-ua": "^2.3.3",
@@ -65,7 +64,6 @@
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^3.4.1",
 		"jest": "^27.5.1",
-		"nodemon": "^2.0.15",
 		"prettier": "^2.6.2"
 	},
 	"bin": "./index.js",
@@ -73,6 +71,14 @@
 		"testEnvironment": "node",
 		"setupFilesAfterEnv": [
 			"./setup-tests.js"
+		]
+	},
+	"nodemonConfig": {
+		"ignore": [
+			"__tests__/*",
+			"node_modules/*",
+			"docker/*",
+			"temp/*"
 		]
 	}
 }

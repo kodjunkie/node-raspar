@@ -11,17 +11,20 @@ RUN apt-get update \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/google.list
 
+# Install global dependencies
+RUN npm install -g pm2 nodemon
+
 # App setup
 WORKDIR /home/src/raspar
 
 COPY ./ ./
 
 # Install app dependencies
-RUN npm install -g pm2
 RUN npm install
 
 # Setup cache directory
-RUN mkdir -p temp && chmod -R 777 temp/
+RUN mkdir -p temp \
+    && chmod -R 777 temp/
 
 EXPOSE 3000
 

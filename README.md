@@ -10,7 +10,7 @@ Easily scrap the web for torrent and media files.
 
 ## Getting Started
 
-Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
+> Raspar exports a resolver function which accepts the configuration object as an argument and returns promises for all available methods.
 
 ### Installation
 
@@ -22,9 +22,9 @@ npm i node-raspar
 
 ### Usage
 
-Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#release-schedule) version of Node.
+Raspar follows the latest [maintenance LTS](https://github.com/nodejs/Release#release-schedule) version of Node and v14.x or greater is recommended.
 
-#### Configuration (options)
+#### Configuration
 
 **NOTE:** You can use any promise based cache store engine from this [list](https://github.com/BryanDonovan/node-cache-manager#store-engines), raspar uses [fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) by default.
 
@@ -77,7 +77,7 @@ const raspar = require("node-raspar")(options);
 
 ## Running / Deploying the API
 
-This is the first step if you're trying to either run it with or without using `Docker`
+This is the first step if you're trying to either run it with or without using `docker`
 In terminal run the following commands to get the code on your machine.
 
 ```bash
@@ -106,9 +106,9 @@ Run these additional commands
 
 ```bash
 # build the container
-$ docker build -t raspar .
+$ docker build -t raspar-api .
 # run the container mapping the ports
-$ docker run -it -p 3000:3000 raspar
+$ docker run --name raspar -it -p 3000:3000 raspar-api
 ```
 
 ### With Docker Compose
@@ -123,6 +123,24 @@ $ docker compose up --build
 $ docker compose up
 # to shut-down
 $ docker compose down
+
+# Solutions to problems you might encounter with docker compose
+#
+# NOTE: Before you run any of the solutions below, you first need access to the rasper shell.
+# to gain access to the shell, open a new terminal window and run
+$ docker exec -it raspar bash
+#
+# to exit raspar shell, run (optional)
+$ exit
+#
+# Problem 1: you might get module loading errors
+# once in the raspar shell, run
+$ npm install
+#
+# Problem 2: you might get "Could not locate (chrome) locally" error
+# this happens when npm doesn't run puppeteer's post install script successfully
+# once in the raspar shell, run
+$ node ./node_modules/puppeteer/install.js
 ```
 
 ### Deploying on Heroku
