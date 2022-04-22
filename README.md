@@ -123,6 +123,24 @@ $ docker compose up --build
 $ docker compose up
 # to shut-down
 $ docker compose down
+
+# Solutions to problems you might encounter with docker compose
+#
+# NOTE: Before you run any of the solutions below, you first need access to the rasper shell.
+# to gain access to the shell, open a new terminal window and run
+$ docker exec -it raspar bash
+#
+# to exit raspar shell, run (optional)
+$ exit
+#
+# Problem 1: you might get module loading errors
+# once in the raspar shell, run
+$ npm install
+#
+# Problem 2: you might get "Could not locate (chrome) locally" error
+# this happens when npm doesn't run puppeteer's post install script successfully
+# once in the raspar shell, run
+$ node ./node_modules/puppeteer/install.js
 ```
 
 ### Deploying on Heroku
