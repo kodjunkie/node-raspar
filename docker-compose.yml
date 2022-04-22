@@ -1,5 +1,4 @@
-version: "3.8"
-
+# Rasper services
 services:
   raspar-api:
     container_name: raspar
