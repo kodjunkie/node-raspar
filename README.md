@@ -77,8 +77,8 @@ const raspar = require("node-raspar")(options);
 
 ## Running / Deploying the API
 
-This is the first step if you're trying to either run it with or without using `docker`
-In terminal run the following commands to get the code on your machine.
+This is the first step if you're trying to either run it with or without using docker,
+In your terminal run the following commands to get the code on your machine.
 
 ```bash
 # first clone the repo
@@ -123,11 +123,14 @@ $ docker compose up --build
 $ docker compose up
 # to shut-down
 $ docker compose down
+```
 
-# Solutions to problems you might encounter with docker compose
-#
-# NOTE: Before you run any of the solutions below, you first need access to the rasper shell.
-# to gain access to the shell, open a new terminal window and run
+#### Solutions to problems you might encounter with docker compose
+
+**NOTE:** Before you run any of the solutions below, you first need access to the rasper shell.
+
+```bash
+# To gain access to the shell, open a new terminal window and run
 $ docker exec -it raspar bash
 #
 # to exit raspar shell, run (optional)
