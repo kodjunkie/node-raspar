@@ -11,5 +11,5 @@ services:
       - "3000:3000"
     volumes:
       - ./:/home/src/raspar
-      - ./docker/node/npm:/home/node/.npm
-      - ./docker/node/jest:/tmp/jest_rs
+      - ./temp:/home/node/.npm
+      - ./temp:/tmp
