@@ -11,5 +11,5 @@ services:
       - "3000:3000"
     volumes:
       - ./:/home/src/raspar
-      - ./temp:/home/node/.npm
-      - ./temp:/tmp
+      - ./temp/chromium:/tmp
+      - ./temp/node:/home/node/.npm
