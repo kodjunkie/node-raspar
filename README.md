@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>Node Raspar 🕷️</h1>
+<h1>🕷️ Node Raspar</h1>
 
 Easily scrap the web for torrent and media files.
 
